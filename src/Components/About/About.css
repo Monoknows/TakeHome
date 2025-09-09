@@ -1,0 +1,62 @@
+.about-container {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    color: #e0e7ef;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(3, 252, 65, 0.15), 0 1.5px 8px #01f80e;
+    max-width: 700px;
+    margin: 2rem auto;
+    position: relative;
+    overflow: hidden;
+ 
+}
+.about-container h2 {
+    color: #9dff7f;
+    font-size: 1.15rem;
+    margin: 0 0 0.75rem 0;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 6px #2dd936;
+    text-align: center;
+}
+.about-container::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 120px;
+    height: 120px;
+    background: rgba(3, 177, 12, 0.15);
+    border-radius: 50%;
+    filter: blur(8px);
+    z-index: 0;
+}
+
+.about-title {
+    font-size: 1.5rem;
+    color: #9dff7f;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 8px #2dd936;
+    position: relative;
+    z-index: 1;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #e0e7ef;
+    position: relative;
+    z-index: 1;
+}
+
+.code-accent {
+    color: #058d11;
+    background: #232526;
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    font-size: 1em;
+    margin: 0 0.2em;
+    box-shadow: 0 1px 4px #04db16;
+}
