@@ -1,44 +1,42 @@
-
 .skill-section {
-    background: linear-gradient(135deg, #232526 0%, #414345 100%);
-    color: #e0e7ef;
-    font-family: 'Fira Mono', 'Consolas', monospace;
-    padding: 1.4rem;                      /* increased padding for larger feel */
-    border-radius: 14px;                  /* slightly larger radius */
-    box-shadow: 0 6px 28px rgba(3, 252, 65, 0.10); /* stronger shadow */
-    border-left: 6px solid #04db16;
-    min-width: 220px;                     /* wider minimum */
-    max-width: 340px;                     /* wider maximum */
-    flex: 0 0 auto;
-    text-align: center;
-    box-sizing: border-box;               /* fixed previous syntax error */
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+  color: #e0e7ef;
+  font-family: "Fira Mono", "Consolas", monospace;
+  padding: 1.4rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 28px rgba(3, 252, 65, 0.1);
+  border-left: 6px solid #04db16;
+  min-width: 220px;
+  max-width: 340px;
+  flex: 0 0 auto;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .skill-section h3 {
-    color: #9dff7f;
-    font-size: 1.15rem;                   /* slightly larger title */
-    margin: 0 0 0.75rem 0;
-    letter-spacing: 1px;
-    text-shadow: 0 1px 6px #2dd936;
+  color: #9dff7f;
+  font-size: 1.15rem;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 6px #2dd936;
 }
 
 .skill-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;                          /* increased gap between items */
-    align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
 }
 
-
 .skill-section li {
-    background: rgba(4, 219, 22, 0.06);
-    color: #e0e7ef;
-    padding: 0.5rem 1rem;                 /* more comfortable padding */
-    border-radius: 10px;
-    font-size: 1rem;                      /* slightly larger text */
-    width: 100%;
-    box-sizing: border-box;
+  background: rgba(4, 219, 22, 0.06);
+  color: #e0e7ef;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }

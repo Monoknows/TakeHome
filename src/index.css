@@ -1,54 +1,24 @@
 @import "tailwindcss";
 @plugin "daisyui";
-:root {
+:html,
+body,
+root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  width: 100%;
   font-weight: 400;
-
+  height: 100%;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  
-  background: linear-gradient(135deg, #0d1b12 0%, #088a03 100%);
-  min-height: 100vh;
-
+  padding: 0;
+  margin: 0;
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  min-width: full;
   min-height: 100vh;
-  position: relative;
   overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: -100px;
-  left: -100px;
-  width: 200vw;
-  height: 200vh;
-  background: repeating-linear-gradient(
-    120deg,
-    rgba(127, 209, 255, 0.07) 0px,
-    rgba(127, 209, 255, 0.07) 2px,
-    transparent 2px,
-    transparent 40px
-  );
-  pointer-events: none;
-  z-index: 0;
-  animation: moveGrid 16s linear infinite;
-}
-
-@keyframes moveGrid {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(40px, 40px); }
 }
 
 h1 {
@@ -90,7 +60,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background: linear-gradient(135deg, #e0e7ef 0%, #7fd1ff 100%);
+    background: linear-gradient(135deg, #cfd8e3 0%, #5a7bbf 100%);
   }
   a:hover {
     color: #747bff;

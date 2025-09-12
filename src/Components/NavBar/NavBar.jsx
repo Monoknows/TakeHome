@@ -22,21 +22,19 @@ export default function NavBar() {
   return (
     <nav className="sticky top-0 z-50 bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-white shadow-lg border-b-2 border-green-500">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center">
-        {/* Left: name */}
         <div className="flex items-center gap-3">
           <span className="font-mono text-green-300 font-bold tracking-wide">
             Jon Alfred
           </span>
         </div>
 
-        {/* Center: links (desktop) */}
         <div className="flex-1 flex justify-center lg:flex">
           <ul className="flex gap-6">
             {links.map((l) => (
               <li key={l.section}>
                 <button
                   onClick={() => handleClick(l.section)}
-                  className="text-sm text-green-100 hover:text-green-300 px-3 py-1 rounded-md transition-colors duration-200"
+                  className="text-sm text-green-400 hover:text-green-300 px-3 py-1 rounded-md transition-colors duration-200"
                 >
                   {l.label}
                 </button>
@@ -45,7 +43,6 @@ export default function NavBar() {
           </ul>
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setOpen((v) => !v)}
           className="lg:hidden ml-auto p-2 rounded-md text-green-200 hover:bg-green-600/20 transition"
@@ -85,7 +82,6 @@ export default function NavBar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className="lg:hidden bg-gradient-to-br from-green-900 via-green-800 to-green-700 border-t border-green-500/30">
           <ul className="flex flex-col px-4 py-3 gap-2">
@@ -93,7 +89,7 @@ export default function NavBar() {
               <li key={l.section}>
                 <button
                   onClick={() => handleClick(l.section)}
-                  className="block w-full text-left px-3 py-2 rounded-md text-green-100 hover:bg-green-600/20 transition"
+                  className="block w-full text-left px-3 py-2 rounded-md text-green-400 hover:bg-green-600/20 transition"
                 >
                   {l.label}
                 </button>
