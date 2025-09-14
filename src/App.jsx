@@ -1,21 +1,16 @@
-import "./App.css";
-import { About } from "./Components/About/About";
-import Header from "./Components/Header/Header";
-import { Contacts } from "./Components/Contacts/Contacts";
-import { Skills } from "./Components/Skills/Skills";
-import { Info } from "./Components/Info/Info";
+import { useState } from "react";
 import NavBar from "./Components/NavBar/NavBar";
-function App() {
+import Header from "./Components/Header/Header";
+import About from "./Components/About/About";
+
+export default function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
-    <div>
-      <NavBar />
-      <Header />
-      <Skills />
-      <Info />
-      <About />
-      <Contacts />
-    </div>
+    <>
+      <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Header darkMode={darkMode} />
+      <About darkMode={darkMode} />
+    </>
   );
 }
-
-export default App;

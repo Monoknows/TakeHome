@@ -1,17 +1,42 @@
-export default function Header() {
+export default function Header({ darkMode }) {
   return (
-    <section id="header" className="w-full h-screen ">
-      <div className="w-full h-full bg-cover bg-center bg-no-repeat bg-[url('/it.jpg')]">
-        <div className="flex items-center justify-center w-full h-full bg-black/60 text-center text-neutral-content">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Jon Alfred V. Bernabe</h1>
-            <p className="mb-5">
-              An aspiring software developer with a passion for creating
-              impactful solutions to the modern world's challenges.
-            </p>
-          </div>
+    <section id="header">
+      <header
+        className={`p-15 h-150 flex items-center justify-between text-xl transition-colors duration-300 ${
+          darkMode ? "bg-slate-900" : "bg-blue-200"
+        }`}
+      >
+        <div className="text-left">
+          <h1
+            className={`font-inter font-bold text-3xl transition-colors duration-300 ${
+              darkMode ? "text-blue-300" : "text-blue-400"
+            }`}
+          >
+            Jon Alfred V. Bernabe
+          </h1>
+          <p
+            className={`text-xl transition-colors duration-300 ${
+              darkMode ? "text-slate-300" : "text-blue-400"
+            }`}
+          >
+            A BSIT student that has a passion for coding and is willing to learn
+            more.
+          </p>
         </div>
-      </div>
+
+        <div className="relative w-[350px] h-[350px]">
+          <img
+            className="absolute inset-0 w-full h-full rounded-full object-cover transition-opacity duration-300 opacity-100 hover:opacity-0"
+            src="./pfp.png"
+            alt="profile"
+          />
+          <img
+            className="absolute inset-0 w-full h-full rounded-full object-cover transition-opacity duration-300 opacity-0 hover:opacity-100"
+            src="./finn.png"
+            alt="profile alt"
+          />
+        </div>
+      </header>
     </section>
   );
 }

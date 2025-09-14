@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@theme {
+  --dark-mode: class;
+}
 :html,
 body,
 root {
