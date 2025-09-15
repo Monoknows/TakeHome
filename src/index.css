@@ -73,3 +73,17 @@ button:focus-visible {
     box-shadow: 0 2px 8px #7fd1ff;
   }
 }
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 5s linear infinite;
+}
