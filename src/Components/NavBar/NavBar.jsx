@@ -16,7 +16,7 @@ export default function NavBar({ darkMode, setDarkMode }) {
       </div>
 
       <ul className="flex space-x-6">
-        {["Header", "About", "Skills", "Projects", "Contact"].map((item) => (
+        {["Home", "About", "Skills", "Projects", "Contact"].map((item) => (
           <li key={item}>
             <a
               href={`#${item.toLowerCase()}`}

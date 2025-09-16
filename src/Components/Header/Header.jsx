@@ -1,6 +1,6 @@
 export default function Header({ darkMode }) {
   return (
-    <section id="header">
+    <section id="home">
       <header
         className={`p-15 h-150 flex items-center justify-between text-xl transition-colors duration-300 ${
           darkMode ? "bg-slate-900" : "bg-blue-200"
