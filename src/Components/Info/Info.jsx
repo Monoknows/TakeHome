@@ -9,12 +9,14 @@ export function Info({ darkMode }) {
     {
       title: "SafeHub",
       img: "./SafeHub.png",
-      description: "SafeHub is a mental health care school website.",
+      description:
+        "SafeHub is a mental health websystem that helps the students of La Concolasion University Of The Philippines to take care of their mental health.",
     },
     {
       title: "Hotel",
       img: "./Hotel.png",
-      description: "Hotel is a hotel system.",
+      description:
+        "This hotel system is developed to streamline and automate the essential functions of hotel operations. It focuses on providing a user-friendly interface for staff to manage reservations, guest check-ins and check-outs, room availability, and billing.",
     },
   ];
 
@@ -39,10 +41,10 @@ export function Info({ darkMode }) {
           {projects.map((p) => (
             <article
               key={p.title}
-              className={`overflow-hidden rounded-xl shadow ring-1 transition-colors duration-300 ${
+              className={`overflow-hidden rounded-xl shadow ring-1 transition-transform transition-shadow duration-300 hover:scale-105 ${
                 darkMode
-                  ? "bg-slate-800 ring-slate-700"
-                  : "bg-white ring-blue-200"
+                  ? "bg-slate-800 ring-slate-700 hover:shadow-[0_8px_30px_rgba(0,0,0,0.9)]"
+                  : "bg-white ring-blue-200 hover:shadow-lg"
               }`}
             >
               <div className="aspect-[16/10] overflow-hidden bg-slate-200">
