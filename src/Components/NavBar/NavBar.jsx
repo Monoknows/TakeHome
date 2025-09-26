@@ -7,7 +7,14 @@ export default function NavBar({ darkMode, setDarkMode }) {
         darkMode ? "bg-slate-950" : "bg-blue-100"
       }`}
     >
-      <div className="font-bold text-xl text-blue-300">My Portfolio</div>
+      <div
+        className={
+          "font-bold text-xl " +
+          (darkMode ? " text-blue-300" : " text-blue-600")
+        }
+      >
+        My Portfolio
+      </div>
 
       {/* Menu */}
       <ul className="flex space-x-6">
