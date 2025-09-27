@@ -1,7 +1,7 @@
 export function Info({ darkMode }) {
   const projects = [
     {
-      title: "Ewan",
+      title: "Adventure of Ewan",
       img: "./Ewan.png",
       description:
         "AdventureOfEwan is a 2D platformer game. That has a simple and cute design. Yet challenging gameplay.",
@@ -13,7 +13,7 @@ export function Info({ darkMode }) {
         "SafeHub is a mental health websystem that helps the students of La Concolasion University Of The Philippines to take care of their mental health.",
     },
     {
-      title: "Hotel",
+      title: "Royal Hotel",
       img: "./Hotel.png",
       description:
         "This hotel system is developed to streamline and automate the essential functions of hotel operations. It focuses on providing a user-friendly interface for staff to manage reservations, guest check-ins and check-outs, room availability, and billing.",
@@ -41,7 +41,7 @@ export function Info({ darkMode }) {
           {projects.map((p) => (
             <article
               key={p.title}
-              className={`overflow-hidden rounded-xl shadow ring-1 transition-transform transition-shadow duration-300 hover:scale-105 ${
+              className={`overflow-hidden rounded-xl shadow ring-1 transition-transform  duration-300 hover:scale-105 ${
                 darkMode
                   ? "bg-slate-800 ring-slate-700 hover:shadow-[0_8px_30px_rgba(0,0,0,0.9)]"
                   : "bg-white ring-blue-200 hover:shadow-lg"
