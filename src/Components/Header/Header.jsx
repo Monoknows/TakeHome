@@ -1,12 +1,113 @@
+import { useRef, useEffect } from "react";
+
+function LiveBackground({ darkMode }) {
+  const canvasRef = useRef(null);
+  const particles = useRef([]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const makeParticles = () => {
+      particles.current = Array.from({ length: 40 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: 1 + Math.random() * 3,
+        dx: -0.5 + Math.random(),
+        dy: -0.5 + Math.random(),
+        a: Math.random() * 360,
+        da: -0.5 + Math.random(),
+      }));
+    };
+    makeParticles();
+
+    const colors = darkMode
+      ? [
+          "rgba(96,165,250,0.5)",
+          "rgba(147,197,253,0.4)",
+          "rgba(59,130,246,0.35)",
+        ]
+      : [
+          "rgba(30,64,175,0.35)",
+          "rgba(59,130,246,0.30)",
+          "rgba(14,165,233,0.25)",
+        ];
+
+    const bgGradient = () => {
+      const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      if (darkMode) {
+        g.addColorStop(0, "#0f172a");
+        g.addColorStop(1, "#1e293b");
+      } else {
+        g.addColorStop(0, "#bfdbfe");
+        g.addColorStop(1, "#93c5fd");
+      }
+      return g;
+    };
+
+    const draw = () => {
+      ctx.fillStyle = bgGradient();
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.current.forEach((p) => {
+        p.x += p.dx * 0.6;
+        p.y += p.dy * 0.6;
+        p.a += p.da;
+        if (p.x < -10) p.x = canvas.width + 10;
+        if (p.x > canvas.width + 10) p.x = -10;
+        if (p.y < -10) p.y = canvas.height + 10;
+        if (p.y > canvas.height + 10) p.y = -10;
+
+        ctx.beginPath();
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        ctx.fillStyle = color;
+        ctx.arc(
+          p.x,
+          p.y,
+          p.r + Math.sin((p.a * Math.PI) / 180) * 0.5,
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
+      });
+
+      requestAnimationFrame(draw);
+    };
+
+    let raf = requestAnimationFrame(draw);
+    return () => {
+      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(raf);
+    };
+  }, [darkMode]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none select-none"
+    />
+  );
+}
+
 export default function Header({ darkMode }) {
   return (
     <section id="home">
       <header
-        className={`p-15 h-150 flex items-center justify-between text-xl transition-colors duration-300 ${
+        className={`relative overflow-hidden p-15 h-150 flex items-center justify-between text-xl transition-colors duration-300 ${
           darkMode ? "bg-slate-900" : "bg-blue-200"
         }`}
       >
-        <div className="text-left">
+        <LiveBackground darkMode={darkMode} />
+
+        <div className="relative z-10 text-left">
           <h1
             className={`font-inter font-bold text-3xl transition-colors duration-300 ${
               darkMode ? "text-blue-300" : "text-blue-400"
@@ -16,7 +117,7 @@ export default function Header({ darkMode }) {
           </h1>
           <p
             className={`text-xl transition-colors duration-300 ${
-              darkMode ? "text-slate-300" : "text-blue-400"
+              darkMode ? "text-slate-300" : "text-blue-600"
             }`}
           >
             A passionate BSIT student with a love for coding and a constant{" "}
@@ -25,7 +126,7 @@ export default function Header({ darkMode }) {
           </p>
         </div>
 
-        <div className="relative w-[350px] h-[350px]">
+        <div className="relative z-10 w-[350px] h-[350px]">
           <img
             className="absolute inset-0 w-full h-full rounded-full object-cover transition-opacity duration-300 opacity-100 hover:opacity-0"
             src="./pfp.png"
