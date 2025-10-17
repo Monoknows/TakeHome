@@ -3,7 +3,6 @@ import { useState } from "react";
 export default function Contacts({ darkMode }) {
   return (
     <footer
-      id="contact"
       role="contentinfo"
       className={`mt-auto border-t transition-colors duration-300 ${
         darkMode
@@ -11,15 +10,7 @@ export default function Contacts({ darkMode }) {
           : "bg-blue-200 border-blue-300"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 py-10">
-        <h2
-          className={`mb-6 text-2xl font-bold tracking-wide transition-colors duration-300 ${
-            darkMode ? "text-blue-200" : "text-blue-600"
-          }`}
-        >
-          Contacts
-        </h2>
-      </div>
+      <div className="max-w-6xl mx-auto px-4 py-10"></div>
 
       <div className="grid gap-6 sm:grid-cols-4 lg:grid-cols-4">
         <div className="max-w-6xl mx-auto">
