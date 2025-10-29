@@ -8,7 +8,7 @@ export default function About({ darkMode }) {
       }
     >
       <div
-        className={`card w-100000 max-w-2xl shadow-xl h-full flex ${
+        className={`card w-500  shadow-xl h-full transition hover:shadow-2xl hover:scale-105 flex ${
           darkMode
             ? "bg-slate-800 text-blue-300 focus:ring-2 focus:ring-blue-300"
             : "bg-white text-blue-600 focus:ring-2 focus:ring-blue-600"
@@ -16,7 +16,7 @@ export default function About({ darkMode }) {
       >
         <div
           tabIndex={0}
-          className="card w-full h-full shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition hover:shadow-2xl hover:scale-105 flex"
+          className="card w-full h-full shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 "
         >
           <div className="card-body flex flex-col justify-center h-full">
             <h1 className="card-title text-2xl font-bold">About Me</h1>

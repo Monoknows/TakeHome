@@ -47,4 +47,8 @@ export const Data = [
     id: 12,
     image: "src/assets/adobe.png",
   },
+  {
+    id: 13,
+    image: "src/assets/n8n-color.png",
+  },
 ];
