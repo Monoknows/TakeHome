@@ -1,5 +1,7 @@
+"use client";
 import React, { useState, useRef, useEffect } from "react";
 import * as DOMPurify from "dompurify";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ApiChatbot({ darkMode }) {
   const purifier =
@@ -130,126 +132,158 @@ export default function ApiChatbot({ darkMode }) {
 
   return (
     <div className="fixed bottom-8 right-8 z-50">
-      {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          className={`rounded-full w-14 h-14 flex items-center justify-center font-semibold shadow-lg transition-colors duration-300 ${
-            darkMode
-              ? "bg-slate-800 text-blue-300 border border-slate-700 hover:bg-slate-700"
-              : "bg-blue-500 text-white hover:bg-blue-600"
-          }`}
-        >
-          Chat
-        </button>
-      )}
-
-      {open && (
-        <div
-          className={`w-80 max-w-sm h-96 shadow-xl flex flex-col overflow-hidden rounded-2xl border transition-colors duration-300 ${
-            darkMode
-              ? "bg-slate-900 border-slate-700 text-slate-200"
-              : "bg-blue-50 border-blue-200 text-slate-900"
-          }`}
-        >
-          <div
-            className={`flex items-center justify-between px-4 py-2 font-semibold transition-colors duration-300 ${
-              darkMode ? "bg-slate-800 text-blue-300" : "bg-blue-300 text-white"
+      <AnimatePresence>
+        {!open && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setOpen(true)}
+            className={`rounded-full w-14 h-14 flex items-center justify-center font-semibold shadow-lg transition-colors duration-300 ${
+              darkMode
+                ? "bg-slate-800 text-blue-300 border border-slate-700 hover:bg-slate-700"
+                : "bg-blue-500 text-white hover:bg-blue-600"
             }`}
           >
-            <h2 className="text-sm">AI Chatbot</h2>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setMessages([])}
-                className={`h-9 px-3 rounded-md text-xs font-medium flex items-center justify-center transition ${
+            Chat
+          </motion.button>
+        )}
+
+        {open && (
+          <motion.div
+            key="chatbox"
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 30, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className={`w-80 max-w-sm h-96 shadow-xl flex flex-col overflow-hidden rounded-2xl border transition-colors duration-300 ${
+              darkMode
+                ? "bg-slate-900 border-slate-700 text-slate-200"
+                : "bg-blue-50 border-blue-200 text-slate-900"
+            }`}
+          >
+            <div
+              className={`flex items-center justify-between px-4 py-2 font-semibold transition-colors duration-300 ${
+                darkMode
+                  ? "bg-slate-800 text-blue-300"
+                  : "bg-blue-300 text-white"
+              }`}
+            >
+              <h2 className="text-sm">AI Chatbot</h2>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setMessages([])}
+                  className={`h-9 px-3 rounded-md text-xs font-medium flex items-center justify-center transition ${
+                    darkMode
+                      ? "bg-slate-700 text-blue-300 hover:bg-slate-600"
+                      : "bg-white text-blue-500 hover:bg-blue-100"
+                  }`}
+                >
+                  Clear
+                </button>
+                <button
+                  onClick={() => setOpen(false)}
+                  className={`h-9 w-9 flex items-center justify-center rounded-md text-lg font-bold transition ${
+                    darkMode
+                      ? "bg-slate-700 text-blue-300 hover:bg-slate-600"
+                      : "bg-white text-blue-500 hover:bg-blue-100"
+                  }`}
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+
+            {/* Messages */}
+            <div
+              ref={scrollRef}
+              className={`flex-1 overflow-y-auto p-3 flex flex-col gap-2 ${
+                darkMode ? "bg-slate-900" : "bg-blue-50"
+              }`}
+            >
+              {messages.length === 0 && (
+                <div
+                  className={`text-xs ${
+                    darkMode ? "text-slate-400" : "text-slate-600"
+                  }`}
+                >
+                  Say hi 👋
+                </div>
+              )}
+
+              <AnimatePresence>
+                {messages.map((msg, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{
+                      opacity: 0,
+                      y: msg.sender === "user" ? 20 : -20,
+                      scale: 0.95,
+                    }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className={`my-1 p-2 max-w-[85%] rounded-xl text-sm shadow-sm ${
+                      msg.sender === "user"
+                        ? darkMode
+                          ? "self-end ml-auto bg-blue-600 text-white"
+                          : "self-end ml-auto bg-blue-500 text-white"
+                        : darkMode
+                        ? "self-start mr-auto bg-slate-800 text-slate-200"
+                        : "self-start mr-auto bg-white border border-blue-100 text-slate-900"
+                    }`}
+                  >
+                    {msg.text}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+
+            {/* Input */}
+            <div
+              className={`px-3 py-2 border-t flex gap-2 transition-colors duration-300 ${
+                darkMode
+                  ? "border-slate-700 bg-slate-900"
+                  : "border-blue-200 bg-blue-50"
+              }`}
+            >
+              <input
+                className={`flex-grow h-9 px-3 text-sm rounded-md focus:outline-none border transition-colors duration-300 ${
                   darkMode
-                    ? "bg-slate-700 text-blue-300 hover:bg-slate-600"
-                    : "bg-white text-blue-500 hover:bg-blue-100"
+                    ? "bg-slate-800 border-slate-700 text-slate-200 placeholder-slate-500"
+                    : "bg-white border-blue-200 text-slate-900 placeholder-slate-400"
                 }`}
-              >
-                Clear
-              </button>
+                placeholder="Type your message..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    sendMessage();
+                    setInput("");
+                  }
+                }}
+              />
               <button
-                onClick={() => setOpen(false)}
-                className={`h-9 w-9 flex items-center justify-center rounded-md text-lg font-bold transition ${
-                  darkMode
-                    ? "bg-slate-700 text-blue-300 hover:bg-slate-600"
-                    : "bg-white text-blue-500 hover:bg-blue-100"
+                className={`h-9 px-4 rounded-md font-medium transition-colors duration-300 flex items-center justify-center ${
+                  loading
+                    ? "bg-gray-400 cursor-not-allowed text-blue-400"
+                    : darkMode
+                    ? "bg-blue-700 hover:bg-blue-600 text-blue-400"
+                    : "bg-blue-500 hover:bg-blue-600 text-blue-400"
                 }`}
+                onClick={() => {
+                  sendMessage();
+                  setInput("");
+                }}
+                disabled={loading}
               >
-                ×
+                {loading ? "..." : "Send"}
               </button>
             </div>
-          </div>
-
-          <div
-            ref={scrollRef}
-            className={`flex-1 overflow-y-auto p-3 flex flex-col gap-2 ${
-              darkMode ? "bg-slate-900" : "bg-blue-50"
-            }`}
-          >
-            {messages.length === 0 && (
-              <div
-                className={`text-xs  ${
-                  darkMode ? "text-slate-400" : "text-slate-600"
-                }`}
-              >
-                Say hi 👋
-              </div>
-            )}
-
-            {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`my-1 p-2 max-w-[85%] rounded-xl text-sm shadow-sm ${
-                  msg.sender === "user"
-                    ? darkMode
-                      ? "self-end ml-auto bg-blue-600 text-white"
-                      : "self-end ml-auto bg-blue-500 text-white"
-                    : darkMode
-                    ? "self-start mr-auto bg-slate-800 text-slate-200"
-                    : "self-start mr-auto bg-white border border-blue-100 text-slate-900"
-                }`}
-              >
-                {msg.text}
-              </div>
-            ))}
-          </div>
-
-          {/* Input */}
-          <div
-            className={`px-3 py-2 border-t flex gap-2 transition-colors duration-300 ${
-              darkMode
-                ? "border-slate-700 bg-slate-900"
-                : "border-blue-200 bg-blue-50"
-            }`}
-          >
-            <input
-              className={`flex-grow h-9 px-3 text-sm rounded-md focus:outline-none border transition-colors duration-300 ${
-                darkMode
-                  ? "bg-slate-800 border-slate-700 text-slate-200 placeholder-slate-500"
-                  : "bg-white border-blue-200 text-slate-900 placeholder-slate-400"
-              }`}
-              placeholder="Type your message..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            />
-            <button
-              className={`h-9 px-4 rounded-md font-medium transition-colors duration-300 flex items-center justify-center ${
-                loading
-                  ? "bg-gray-400 cursor-not-allowed text-blue-400"
-                  : darkMode
-                  ? "bg-blue-700 hover:bg-blue-600 text-blue-400"
-                  : "bg-blue-500 hover:bg-blue-600 text-blue-400"
-              }`}
-              onClick={sendMessage}
-              disabled={loading}
-            >
-              {loading ? "..." : "Send"}
-            </button>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
