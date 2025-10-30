@@ -15,7 +15,7 @@ export default function Divider({ darkMode }) {
           }`}
         >
           React | JavaScript | HTML | CSS | TailwindCSS | Node.js | Python | Git
-          | GitHub | VS Code | Figma | Adobe Photoshop |
+          | GitHub | VS Code | Figma | Adobe Photoshop | N8N
         </p>
         <p
           className={`text-lg font-bold px-4 ${
@@ -23,7 +23,7 @@ export default function Divider({ darkMode }) {
           }`}
         >
           React | JavaScript | HTML | CSS | TailwindCSS | Node.js | Python | Git
-          | GitHub | VS Code | Figma | Adobe Photoshop |
+          | GitHub | VS Code | Figma | Adobe Photoshop | N8N
         </p>
       </div>
     </div>

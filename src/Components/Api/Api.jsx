@@ -14,7 +14,6 @@ export default function Api({ darkMode }) {
       return;
     }
 
-    // EmailJS integration
     const serviceId = "service_zn9ck6i";
     const templateId = "template_q7z7i3r";
     const publicKey = "GkiixCDou3KmI0-lR";
@@ -31,7 +30,6 @@ export default function Api({ darkMode }) {
       },
     };
 
-    //Send email via API call
     try {
       const response = await axios.post(
         "https://api.emailjs.com/api/v1.0/email/send",

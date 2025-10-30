@@ -6,7 +6,6 @@ import Divider from "./Components/divider/divider";
 import Skills from "./Components/Skills/Skills";
 import { Info } from "./Components/Info/Info";
 import Contacts from "./Components/Contacts/Contacts";
-import Api from "./Components/Api/Api";
 import ApiChatbot from "./Components/Api/apiChatbot";
 
 export default function App() {
@@ -20,7 +19,6 @@ export default function App() {
       <About darkMode={darkMode} />
       <Skills darkMode={darkMode} />
       <Info darkMode={darkMode} />
-      <Api darkMode={darkMode} />
       <ApiChatbot darkMode={darkMode} />
       <Contacts darkMode={darkMode} />
     </>

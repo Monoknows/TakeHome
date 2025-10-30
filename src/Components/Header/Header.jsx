@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 function LiveBackground({ darkMode }) {
   const canvasRef = useRef(null);
@@ -53,6 +53,7 @@ function LiveBackground({ darkMode }) {
       return g;
     };
 
+    let rafId = 0;
     const draw = () => {
       ctx.fillStyle = bgGradient();
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -79,13 +80,13 @@ function LiveBackground({ darkMode }) {
         ctx.fill();
       });
 
-      requestAnimationFrame(draw);
+      rafId = requestAnimationFrame(draw);
     };
 
-    let raf = requestAnimationFrame(draw);
+    rafId = requestAnimationFrame(draw);
     return () => {
       window.removeEventListener("resize", resize);
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(rafId);
     };
   }, [darkMode]);
 
@@ -94,6 +95,92 @@ function LiveBackground({ darkMode }) {
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none select-none"
     />
+  );
+}
+
+function TypingHeader({ text = "", darkMode }) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const [inView, setInView] = useState(false);
+  const elRef = useRef(null);
+  const typingSpeed = 90;
+
+  useEffect(() => {
+    const node = elRef.current;
+    if (!node) return;
+
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      setInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    // Start typing only when in view
+    const str = String(text ?? "");
+    setDisplayedText("");
+    if (!inView || str.length === 0) return;
+
+    let i = 0;
+    let timer = null;
+    const tick = () => {
+      setDisplayedText(str.slice(0, i + 1));
+      i += 1;
+      if (i < str.length) {
+        timer = setTimeout(tick, typingSpeed);
+      }
+    };
+
+    timer = setTimeout(tick, typingSpeed);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [text, inView]);
+
+  useEffect(() => {
+    const cid = setInterval(() => {
+      setCursorVisible((v) => !v);
+    }, 600);
+    return () => clearInterval(cid);
+  }, []);
+
+  return (
+    <h1
+      ref={elRef}
+      className={`font-inter font-bold text-3xl transition-colors duration-300 transition-all duration-700 ease-out transform ${
+        darkMode ? "text-blue-300" : "text-blue-400"
+      } ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+      aria-live="polite"
+    >
+      {displayedText}
+      <span
+        aria-hidden="true"
+        style={{
+          display: "inline-block",
+          width: "0.6rem",
+          marginLeft: "0.25rem",
+          opacity: cursorVisible ? 1 : 0,
+          transition: "opacity 120ms linear",
+        }}
+      >
+        |
+      </span>
+    </h1>
   );
 }
 
@@ -107,26 +194,25 @@ export default function Header({ darkMode }) {
       >
         <LiveBackground darkMode={darkMode} />
 
-        <div className="relative z-10 text-left">
-          <h1
-            className={`font-inter font-bold text-3xl transition-colors duration-300 ${
-              darkMode ? "text-blue-300" : "text-blue-400"
-            }`}
-          >
-            Jon Alfred V. Bernabe
-          </h1>
+        <div className="relative z-10 text-left max-w-[60%]">
+          <TypingHeader text="Jon Alfred V. Bernabe" darkMode={darkMode} />
+
           <p
             className={`text-xl transition-colors duration-300 ${
               darkMode ? "text-slate-300" : "text-blue-600"
             }`}
           >
-            A passionate BSIT student with a love for coding and a constant{" "}
+            A passionate BSIT student with a love for coding and a constant
             <br />
             drive to learn, grow, and take on new challenges in the tech world.
           </p>
         </div>
 
-        <div className="relative z-10 w-[350px] h-[350px]">
+        <div
+          className="relative z-10 w-[350px] h-[350px]"
+          aria-hidden="true"
+          role="img"
+        >
           <img
             className="absolute inset-0 w-full h-full rounded-full object-cover transition-opacity duration-300 opacity-100 hover:opacity-0"
             src="./pfp.png"

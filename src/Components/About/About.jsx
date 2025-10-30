@@ -1,6 +1,39 @@
+import { useEffect, useRef, useState } from "react";
+
 export default function About({ darkMode }) {
+  const sectionRef = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReduced) {
+      setInView(true);
+      return;
+    }
+
+    // Toggle inView on enter/exit so the animation runs each time the section
+    // comes into (or leaves) the viewport.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="about"
       className={
         "h-150 p-10 flex justify-center transition-colors duration-300 " +
@@ -8,11 +41,11 @@ export default function About({ darkMode }) {
       }
     >
       <div
-        className={`card w-500  shadow-xl h-full transition hover:shadow-2xl hover:scale-105 flex ${
+        className={`card w-500 shadow-xl h-full flex transform transition-all duration-700 ease-out hover:shadow-2xl hover:scale-105 ${
           darkMode
             ? "bg-slate-800 text-blue-300 focus:ring-2 focus:ring-blue-300"
             : "bg-white text-blue-600 focus:ring-2 focus:ring-blue-600"
-        }`}
+        } ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
       >
         <div
           tabIndex={0}
@@ -39,7 +72,7 @@ export default function About({ darkMode }) {
               contribute to innovative projects that combine technical
               excellence with meaningful purpose.
             </p>
-            <p className="mt-4 leading-relaxed">
+            <p className="mt-3 leading-relaxed">
               Outside of development, I enjoy continuous learning through books,
               online courses, and open-source contributions. These experiences
               not only sharpen my technical skills but also expand my
