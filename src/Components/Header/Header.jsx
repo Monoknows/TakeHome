@@ -29,26 +29,27 @@ function LiveBackground({ darkMode }) {
     };
     makeParticles();
 
+    // 🌈 Updated, visually pleasing color palette
     const colors = darkMode
       ? [
-          "rgba(96,165,250,0.5)",
-          "rgba(147,197,253,0.4)",
-          "rgba(59,130,246,0.35)",
+          "rgba(94,234,212,0.5)", // teal glow
+          "rgba(125,211,252,0.45)", // soft cyan
+          "rgba(165,180,252,0.35)", // subtle violet
         ]
       : [
-          "rgba(30,64,175,0.35)",
-          "rgba(59,130,246,0.30)",
-          "rgba(14,165,233,0.25)",
+          "rgba(96,165,250,0.35)", // calm blue
+          "rgba(196,181,253,0.3)", // light purple
+          "rgba(244,182,255,0.25)", // pink highlight
         ];
 
     const bgGradient = () => {
       const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
       if (darkMode) {
-        g.addColorStop(0, "#0f172a");
+        g.addColorStop(0, "#0b1120");
         g.addColorStop(1, "#1e293b");
       } else {
-        g.addColorStop(0, "#bfdbfe");
-        g.addColorStop(1, "#93c5fd");
+        g.addColorStop(0, "#dbeafe");
+        g.addColorStop(1, "#bfdbfe");
       }
       return g;
     };
@@ -130,7 +131,6 @@ function TypingHeader({ text = "", darkMode }) {
   }, []);
 
   useEffect(() => {
-    // Start typing only when in view
     const str = String(text ?? "");
     setDisplayedText("");
     if (!inView || str.length === 0) return;
@@ -163,7 +163,7 @@ function TypingHeader({ text = "", darkMode }) {
     <h1
       ref={elRef}
       className={`font-inter font-bold text-3xl transition-colors duration-300 transition-all duration-700 ease-out transform ${
-        darkMode ? "text-blue-300" : "text-blue-400"
+        darkMode ? "text-cyan-300" : "text-blue-600"
       } ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
       aria-live="polite"
     >
@@ -199,7 +199,7 @@ export default function Header({ darkMode }) {
 
           <p
             className={`text-xl transition-colors duration-300 ${
-              darkMode ? "text-slate-300" : "text-blue-600"
+              darkMode ? "text-slate-300" : "text-blue-700"
             }`}
           >
             A passionate BSIT student with a love for coding and a constant

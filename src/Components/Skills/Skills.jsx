@@ -6,11 +6,8 @@ export default function Skills({ darkMode }) {
   const [selectedSkill, setSelectedSkill] = useState(null);
   const closeBtnRef = useRef(null);
 
-  // animation state for grid
   const gridRef = useRef(null);
   const [inView, setInView] = useState(false);
-
-  // modal mount / open/close animation control
   const [modalMounted, setModalMounted] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const closeTimer = useRef(null);
@@ -38,18 +35,15 @@ export default function Skills({ darkMode }) {
   }, []);
 
   useEffect(() => {
-    // focus close button when modal fully mounted (open animation started)
     if (modalMounted && closeBtnRef.current) closeBtnRef.current.focus();
   }, [modalMounted]);
 
   useEffect(() => {
-    // Escape to close when modal mounted
     const onKey = (e) => {
       if (e.key === "Escape" && modalMounted) handleClose();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalMounted]);
 
   useEffect(() => {
@@ -59,7 +53,6 @@ export default function Skills({ darkMode }) {
   }, []);
 
   const openSkill = (skill) => {
-    // clear any pending close timers
     if (closeTimer.current) {
       clearTimeout(closeTimer.current);
       closeTimer.current = null;
@@ -67,10 +60,8 @@ export default function Skills({ darkMode }) {
     setIsClosing(false);
     setSelectedSkill(skill);
 
-    // ensure mount happens first, then trigger open animation on next frame
     setModalMounted(false);
     requestAnimationFrame(() => {
-      // small timeout helps ensure CSS transition runs
       requestAnimationFrame(() => setModalMounted(true));
     });
   };
@@ -83,14 +74,13 @@ export default function Skills({ darkMode }) {
   };
 
   const handleClose = () => {
-    // start close animation, then remove selectedSkill
     setIsClosing(true);
     setModalMounted(false);
     closeTimer.current = setTimeout(() => {
       setSelectedSkill(null);
       setIsClosing(false);
       closeTimer.current = null;
-    }, 300); // must match CSS duration
+    }, 300);
   };
 
   const showModal = selectedSkill !== null || isClosing;
@@ -103,8 +93,8 @@ export default function Skills({ darkMode }) {
         }`}
       >
         <h1
-          className={`text-3xl font-bold mb-8 text-center ${
-            darkMode ? "text-blue-300" : "text-blue-600"
+          className={`text-3xl font-bold mb-8 text-center transition-colors duration-300 ${
+            darkMode ? "text-cyan-300" : "text-blue-700"
           }`}
         >
           Skills
@@ -146,7 +136,6 @@ export default function Skills({ darkMode }) {
       </div>
 
       {showModal && (
-        // backdrop: fade in/out. pointer-events only when visible.
         <div
           className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${
             modalMounted && !isClosing
@@ -160,14 +149,13 @@ export default function Skills({ darkMode }) {
             if (e.target === e.currentTarget) handleClose();
           }}
         >
-          {/* dialog: animate on mount (modalMounted true) and animate out when isClosing */}
           <div
             className={`max-w-xl w-full rounded-lg shadow-xl p-6 transform transition-all duration-300 ${
               modalMounted && !isClosing
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-4 scale-95"
             } ${
-              darkMode ? "bg-slate-800 text-blue-300" : "bg-white text-blue-600"
+              darkMode ? "bg-slate-800 text-blue-300" : "bg-white text-blue-700"
             }`}
           >
             <div className="flex items-start justify-between gap-4">
@@ -190,7 +178,7 @@ export default function Skills({ darkMode }) {
               <button
                 ref={closeBtnRef}
                 onClick={handleClose}
-                className="text-xl font-bold p-1 rounded hover:bg-black/10 focus:outline-none"
+                className="text-xl font-bold p-1 rounded hover:bg-blue-400/10 focus:outline-none"
                 aria-label="Close"
               >
                 ×
@@ -206,10 +194,10 @@ export default function Skills({ darkMode }) {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={handleClose}
-                className={`px-4 py-2 rounded ${
+                className={`px-4 py-2 rounded font-medium transition-colors duration-300 ${
                   darkMode
-                    ? "bg-blue-300 text-blue-200 hover:bg-blue-200"
-                    : "bg-blue-600 text-blue-600 hover:bg-blue-500"
+                    ? "bg-blue-300 text-slate-900 hover:bg-blue-200"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
                 } focus:outline-none`}
               >
                 Close

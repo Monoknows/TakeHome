@@ -11,7 +11,7 @@ export default function Divider({ darkMode }) {
       <div className="flex animate-marquee">
         <p
           className={`text-lg font-bold px-4 ${
-            darkMode ? "text-blue-300" : "text-blue-500"
+            darkMode ? "text-cyan-300" : "text-blue-700"
           }`}
         >
           React | JavaScript | HTML | CSS | TailwindCSS | Node.js | Python | Git
@@ -19,7 +19,7 @@ export default function Divider({ darkMode }) {
         </p>
         <p
           className={`text-lg font-bold px-4 ${
-            darkMode ? "text-blue-300" : "text-blue-500"
+            darkMode ? "text-cyan-300" : "text-blue-700"
           }`}
         >
           React | JavaScript | HTML | CSS | TailwindCSS | Node.js | Python | Git

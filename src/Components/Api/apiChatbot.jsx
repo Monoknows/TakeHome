@@ -97,7 +97,7 @@ export default function ApiChatbot({ darkMode }) {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://jonn8n.safehub-lcup.uk/webhook/chatbot",
+        "https://n8n.safehub-lcup.uk/webhook/chatbot",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

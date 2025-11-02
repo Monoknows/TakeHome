@@ -4,65 +4,69 @@ export function Info({ darkMode }) {
       title: "Adventure of Ewan",
       img: "./Ewan.png",
       description:
-        "AdventureOfEwan is a 2D platformer game. That has a simple and cute design. Yet challenging gameplay.",
+        "AdventureOfEwan is a 2D platformer game that features a simple and cute design with fun yet challenging gameplay.",
     },
     {
       title: "SafeHub",
       img: "./SafeHub.png",
       description:
-        "SafeHub is a mental health websystem that helps the students of La Concolasion University Of The Philippines to take care of their mental health.",
+        "SafeHub is a mental health web system designed to help students at La Consolacion University of the Philippines take care of their well-being through supportive digital tools.",
     },
     {
       title: "Royal Hotel",
       img: "./Hotel.png",
       description:
-        "This hotel system is developed to streamline and automate the essential functions of hotel operations. It focuses on providing a user-friendly interface for staff to manage reservations, guest check-ins and check-outs, room availability, and billing.",
+        "Royal Hotel is a management system that automates hotel operations — including reservations, check-ins, check-outs, and billing — all through an intuitive interface.",
     },
   ];
 
   return (
     <section
       id="projects"
-      className={
-        "py-10 transition-colors duration-300" +
-        (darkMode ? " bg-slate-900" : " bg-blue-200")
-      }
+      className={`py-16 transition-colors duration-300 ${
+        darkMode ? "bg-[#0b1120]" : "bg-[#dbeafe]"
+      }`}
     >
-      <div className={"max-w-6xl mx-auto px-4"}>
+      <div className="max-w-6xl mx-auto px-4">
         <h2
-          className={`mb-6 text-3xl font-bold transition-colors duration-300 ${
-            darkMode ? "text-blue-300" : "text-blue-400"
+          className={`mb-10 text-3xl font-bold text-center ${
+            darkMode ? "text-cyan-300" : "text-blue-700"
           }`}
         >
           Projects
         </h2>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p) => (
             <article
               key={p.title}
-              className={`overflow-hidden rounded-xl shadow ring-1 transition-transform  duration-300 hover:scale-105 ${
+              className={`group overflow-hidden rounded-2xl shadow-lg ring-1 transition-all duration-500 transform hover:scale-105 hover:shadow-xl ${
                 darkMode
-                  ? "bg-slate-800 ring-slate-700 hover:shadow-[0_8px_30px_rgba(0,0,0,0.9)]"
-                  : "bg-white ring-blue-200 hover:shadow-lg"
+                  ? "bg-slate-800 ring-slate-700 hover:ring-cyan-400/50 hover:shadow-[0_8px_30px_rgba(0,255,255,0.1)]"
+                  : "bg-white ring-blue-200 hover:ring-blue-400/40 hover:shadow-[0_8px_20px_rgba(59,130,246,0.2)]"
               }`}
             >
-              <div className="aspect-[16/10] overflow-hidden bg-slate-200">
+              <div className="aspect-[16/10] overflow-hidden">
                 <img
                   src={p.img}
                   alt={`${p.title} preview`}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
-              <div className="p-4">
+
+              <div className="p-5">
                 <h3
-                  className={`text-xl font-semibold mb-2 ${
-                    darkMode ? "text-blue-300" : "text-blue-600"
+                  className={`text-xl font-semibold mb-2 transition-colors ${
+                    darkMode ? "text-cyan-300" : "text-blue-700"
                   }`}
                 >
                   {p.title}
                 </h3>
-                <p className={darkMode ? "text-slate-300" : "text-slate-700"}>
+                <p
+                  className={`leading-relaxed ${
+                    darkMode ? "text-slate-300" : "text-slate-700"
+                  }`}
+                >
                   {p.description}
                 </p>
               </div>

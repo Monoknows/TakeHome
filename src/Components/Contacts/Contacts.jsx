@@ -48,24 +48,26 @@ export default function Contacts({ darkMode }) {
         role="contentinfo"
         className={`mt-auto border-t transition-colors duration-300 ${
           darkMode
-            ? "bg-slate-900 border-slate-700 text-slate-100"
-            : "bg-blue-200 border-blue-300 text-slate-900"
+            ? "bg-[#0b1120] border-slate-700 text-cyan-100"
+            : "bg-[#e0f2fe] border-blue-200 text-slate-900"
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Contact Info */}
           <div>
             <h2
               className={`text-2xl font-bold mb-6 ${
-                darkMode ? "text-blue-200" : "text-blue-600"
+                darkMode ? "text-cyan-300" : "text-blue-700"
               }`}
             >
               Contact Information
             </h2>
+
             <div className="space-y-6">
               <div>
                 <h3
                   className={`text-sm uppercase font-semibold mb-2 ${
-                    darkMode ? "text-blue-300" : "text-blue-700"
+                    darkMode ? "text-cyan-400" : "text-blue-600"
                   }`}
                 >
                   Email
@@ -74,7 +76,7 @@ export default function Contacts({ darkMode }) {
                   href="mailto:jonbernabe8@gmail.com"
                   className={`text-sm underline underline-offset-4 transition-colors ${
                     darkMode
-                      ? "text-slate-400 hover:text-blue-300"
+                      ? "text-slate-400 hover:text-cyan-300"
                       : "text-slate-700 hover:text-blue-700"
                   }`}
                 >
@@ -85,7 +87,7 @@ export default function Contacts({ darkMode }) {
               <div>
                 <h3
                   className={`text-sm uppercase font-semibold mb-2 ${
-                    darkMode ? "text-blue-300" : "text-blue-700"
+                    darkMode ? "text-cyan-400" : "text-blue-600"
                   }`}
                 >
                   Phone
@@ -94,7 +96,7 @@ export default function Contacts({ darkMode }) {
                   href="tel:09683194750"
                   className={`text-sm underline underline-offset-4 transition-colors ${
                     darkMode
-                      ? "text-slate-400 hover:text-blue-300"
+                      ? "text-slate-400 hover:text-cyan-300"
                       : "text-slate-700 hover:text-blue-700"
                   }`}
                 >
@@ -105,7 +107,7 @@ export default function Contacts({ darkMode }) {
               <div>
                 <h3
                   className={`text-sm uppercase font-semibold mb-2 ${
-                    darkMode ? "text-blue-300" : "text-blue-700"
+                    darkMode ? "text-cyan-400" : "text-blue-600"
                   }`}
                 >
                   Location
@@ -122,7 +124,7 @@ export default function Contacts({ darkMode }) {
               <div>
                 <h3
                   className={`text-sm uppercase font-semibold mb-2 ${
-                    darkMode ? "text-blue-300" : "text-blue-700"
+                    darkMode ? "text-cyan-400" : "text-blue-600"
                   }`}
                 >
                   Social
@@ -137,7 +139,7 @@ export default function Contacts({ darkMode }) {
                       href="https://github.com/Monoknows"
                       target="_blank"
                       rel="noreferrer"
-                      className="hover:underline underline-offset-4"
+                      className="hover:underline underline-offset-4 hover:text-cyan-400"
                     >
                       GitHub
                     </a>
@@ -147,7 +149,7 @@ export default function Contacts({ darkMode }) {
                       href="https://www.linkedin.com/in/jon-bernabe-9676b6367"
                       target="_blank"
                       rel="noreferrer"
-                      className="hover:underline underline-offset-4"
+                      className="hover:underline underline-offset-4 hover:text-cyan-400"
                     >
                       LinkedIn
                     </a>
@@ -157,10 +159,11 @@ export default function Contacts({ darkMode }) {
             </div>
           </div>
 
+          {/* Contact Form */}
           <div>
             <h2
               className={`mb-6 text-2xl font-bold ${
-                darkMode ? "text-blue-200" : "text-blue-600"
+                darkMode ? "text-cyan-300" : "text-blue-700"
               }`}
             >
               Send a Message
@@ -168,10 +171,10 @@ export default function Contacts({ darkMode }) {
 
             <form
               onSubmit={handleSubmit}
-              className={`w-full p-6 space-y-4 rounded-2xl shadow-lg border ${
+              className={`w-full p-6 space-y-4 rounded-2xl shadow-lg border transition-all duration-300 ${
                 darkMode
-                  ? "bg-slate-800/60 border-slate-700"
-                  : "bg-white/80 border-blue-200"
+                  ? "bg-slate-800/70 border-slate-700"
+                  : "bg-white/90 border-blue-200"
               }`}
               aria-label="Contact form"
             >
@@ -180,27 +183,27 @@ export default function Contacts({ darkMode }) {
                 placeholder="Enter Your Name"
                 value={Name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <input
                 type="email"
                 placeholder="Enter Your Email"
                 value={Email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <textarea
                 placeholder="Enter Your Message"
                 value={Message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={5}
-                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-y"
+                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 resize-y"
               />
               <button
                 type="submit"
                 className={`w-full py-2 rounded font-semibold transition-colors ${
                   darkMode
-                    ? "bg-slate-700 hover:bg-slate-600 text-blue-200"
+                    ? "bg-slate-700 hover:bg-slate-600 text-cyan-200"
                     : "bg-blue-500 hover:bg-blue-600 text-white"
                 }`}
               >
