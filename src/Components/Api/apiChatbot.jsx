@@ -224,7 +224,7 @@ export default function ApiChatbot({ darkMode }) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.9 }}
                     transition={{ duration: 0.25, ease: "easeOut" }}
-                    className={`my-1 p-2 max-w-[85%] rounded-xl text-sm shadow-sm ${
+                    className={`px-4 py-2 max-w-[70%] rounded-2xl text-sm leading-normal shadow-sm break-words whitespace-pre-line ${
                       msg.sender === "user"
                         ? darkMode
                           ? "self-end ml-auto bg-blue-600 text-white"
