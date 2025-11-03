@@ -9,14 +9,16 @@ export function Info({ darkMode }) {
     {
       title: "SafeHub",
       img: "./SafeHub.png",
+      hoverImg: "./safehubHover.png",
       description:
         "SafeHub is a mental health web system designed to help students at La Consolacion University of the Philippines take care of their well-being through supportive digital tools.",
     },
     {
-      title: "Royal Hotel",
-      img: "./Hotel.png",
+      title: "Responder Ai Chatbot",
+      img: "./Responder.png",
+      hoverImg: "./ResponderChat.png",
       description:
-        "Royal Hotel is a management system that automates hotel operations — including reservations, check-ins, check-outs, and billing — all through an intuitive interface.",
+        "Responder Ai Chatbot is an AI-powered chatbot designed to assist programmers through coding-related inquiries, providing quick and accurate responses to enhance their coding experience.",
     },
   ];
 
@@ -46,12 +48,21 @@ export function Info({ darkMode }) {
                   : "bg-white ring-blue-200 hover:ring-blue-400/40 hover:shadow-[0_8px_20px_rgba(59,130,246,0.2)]"
               }`}
             >
-              <div className="aspect-[16/10] overflow-hidden">
+              <div className="aspect-[16/10] overflow-hidden relative">
                 <img
                   src={p.img}
                   alt={`${p.title} preview`}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className={`h-full w-full object-contain transition-transform duration-500 group-hover:scale-110 ${
+                    p.hoverImg ? "group-hover:opacity-0" : ""
+                  }`}
                 />
+                {p.hoverImg && (
+                  <img
+                    src={p.hoverImg}
+                    alt={`${p.title} hover preview`}
+                    className="absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  />
+                )}
               </div>
 
               <div className="p-5">
