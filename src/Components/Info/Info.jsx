@@ -1,8 +1,11 @@
+import { video } from "framer-motion/client";
+
 export function Info({ darkMode }) {
   const projects = [
     {
       title: "Adventure of Ewan",
       img: "./Ewan.png",
+      video: "./Screen-Recording.mp4",
       description:
         "AdventureOfEwan is a 2D platformer game that features a simple and cute design with fun yet challenging gameplay.",
     },
@@ -52,7 +55,7 @@ export function Info({ darkMode }) {
                 <img
                   src={p.img}
                   alt={`${p.title} preview`}
-                  className={`h-full w-full object-contain transition-transform duration-500 group-hover:scale-110 ${
+                  className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
                     p.hoverImg ? "group-hover:opacity-0" : ""
                   }`}
                 />
@@ -61,6 +64,20 @@ export function Info({ darkMode }) {
                     src={p.hoverImg}
                     alt={`${p.title} hover preview`}
                     className="absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  />
+                )}
+                {p.video && (
+                  <video
+                    src={p.video}
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => {
+                      e.target.pause();
+                      e.target.currentTime = 0;
+                    }}
                   />
                 )}
               </div>
