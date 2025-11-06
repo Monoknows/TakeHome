@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import NavBar from "./Components/NavBar/NavBar";
 import Header from "./Components/Header/Header";
 import About from "./Components/About/About";
@@ -7,20 +9,31 @@ import Skills from "./Components/Skills/Skills";
 import { Info } from "./Components/Info/Info";
 import Contacts from "./Components/Contacts/Contacts";
 import ApiChatbot from "./Components/Api/apiChatbot";
+import AdminLogin from "./Components/Admin/AdminLogin";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <>
-      <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
-      <Header darkMode={darkMode} />
-      <Divider darkMode={darkMode} />
-      <About darkMode={darkMode} />
-      <Skills darkMode={darkMode} />
-      <Info darkMode={darkMode} />
-      <ApiChatbot darkMode={darkMode} />
-      <Contacts darkMode={darkMode} />
-    </>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
+              <Header darkMode={darkMode} />
+              <Divider darkMode={darkMode} />
+              <About darkMode={darkMode} />
+              <Skills darkMode={darkMode} />
+              <Info darkMode={darkMode} />
+              <ApiChatbot darkMode={darkMode} />
+              <Contacts darkMode={darkMode} />
+            </>
+          }
+        />
+        <Route path="/admin" element={<AdminLogin darkMode={darkMode} />} />
+      </Routes>
+    </Router>
   );
 }
