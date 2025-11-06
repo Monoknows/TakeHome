@@ -183,21 +183,21 @@ export default function Contacts({ darkMode }) {
                 placeholder="Enter Your Name"
                 value={Name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-500 dark:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <input
                 type="email"
                 placeholder="Enter Your Email"
                 value={Email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-500 dark:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <textarea
                 placeholder="Enter Your Message"
                 value={Message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={5}
-                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 resize-y"
+                className="w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-transparent placeholder-slate-400 text-slate-500 dark:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 resize-y"
               />
               <button
                 type="submit"
