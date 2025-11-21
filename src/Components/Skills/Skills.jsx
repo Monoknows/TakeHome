@@ -155,7 +155,7 @@ export default function Skills({ darkMode }) {
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-4 scale-95"
             } ${
-              darkMode ? "bg-slate-800 text-blue-300" : "bg-white text-blue-700"
+              darkMode ? "bg-slate-800 text-cyan-300" : "bg-white text-blue-700"
             }`}
           >
             <div className="flex items-start justify-between gap-4">
@@ -196,8 +196,8 @@ export default function Skills({ darkMode }) {
                 onClick={handleClose}
                 className={`px-4 py-2 rounded font-medium transition-colors duration-300 ${
                   darkMode
-                    ? "bg-blue-300 text-slate-900 hover:bg-blue-200"
-                    : "bg-blue-600 text-white hover:bg-blue-700"
+                    ? "bg-blue-300 text-cyan-300 hover:bg-blue-200"
+                    : "bg-blue-600 text-blue-700 hover:bg-blue-700"
                 } focus:outline-none`}
               >
                 Close

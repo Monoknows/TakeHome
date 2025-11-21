@@ -203,8 +203,8 @@ export default function Contacts({ darkMode }) {
                 type="submit"
                 className={`w-full py-2 rounded font-semibold transition-colors ${
                   darkMode
-                    ? "bg-slate-700 hover:bg-slate-600 text-cyan-200"
-                    : "bg-blue-500 hover:bg-blue-600 text-white"
+                    ? "bg-slate-700 hover:bg-slate-600 text-cyan-300"
+                    : "bg-blue-500 hover:bg-blue-600 text-blue-700"
                 }`}
               >
                 Send

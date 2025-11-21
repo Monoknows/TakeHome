@@ -148,7 +148,6 @@ export default function Seminars({ darkMode }) {
           </motion.div>
         )}
       </AnimatePresence>
-      {/* ...existing code... */}
     </>
   );
 }
