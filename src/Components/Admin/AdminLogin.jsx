@@ -94,7 +94,6 @@ export default function LoginPage() {
     };
   }, [darkMode]);
 
-  // 🧾 Login Form
   const handleLogin = (e) => {
     e.preventDefault();
     console.log("Logging in with:", email, password);

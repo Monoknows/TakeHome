@@ -89,7 +89,6 @@ export default function ApiChatbot({ darkMode }) {
     tmp.innerHTML = cleaned;
     return tmp.textContent || tmp.innerText || "";
   };
-
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
     const userMessage = { sender: "user", text: input };

@@ -10,6 +10,7 @@ import { Info } from "./Components/Info/Info";
 import Contacts from "./Components/Contacts/Contacts";
 import ApiChatbot from "./Components/Api/apiChatbot";
 import AdminLogin from "./Components/Admin/AdminLogin";
+import Seminars from "./Components/Seminars/Seminars";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -27,6 +28,7 @@ export default function App() {
               <About darkMode={darkMode} />
               <Skills darkMode={darkMode} />
               <Info darkMode={darkMode} />
+              <Seminars darkMode={darkMode} />
               <ApiChatbot darkMode={darkMode} />
               <Contacts darkMode={darkMode} />
             </>

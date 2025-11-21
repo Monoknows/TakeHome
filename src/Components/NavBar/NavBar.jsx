@@ -42,24 +42,26 @@ export default function NavBar({ darkMode, setDarkMode }) {
 
       {/* Menu */}
       <ul className="flex space-x-6">
-        {["Home", "About", "Skills", "Projects", "Contact"].map((item) => {
-          const id = item.toLowerCase();
-          return (
-            <li key={item}>
-              <a
-                href={`#${id}`}
-                onClick={(e) => handleNavClick(e, id)}
-                className={`${
-                  darkMode
-                    ? "text-blue-400 hover:text-blue-300"
-                    : "text-blue-600 hover:text-slate-700"
-                } hover:underline transition-colors duration-300`}
-              >
-                {item}
-              </a>
-            </li>
-          );
-        })}
+        {["Home", "About", "Skills", "Projects", "Seminars", "Contact"].map(
+          (item) => {
+            const id = item.toLowerCase();
+            return (
+              <li key={item}>
+                <a
+                  href={`#${id}`}
+                  onClick={(e) => handleNavClick(e, id)}
+                  className={`${
+                    darkMode
+                      ? "text-blue-400 hover:text-blue-300"
+                      : "text-blue-600 hover:text-slate-700"
+                  } hover:underline transition-colors duration-300`}
+                >
+                  {item}
+                </a>
+              </li>
+            );
+          }
+        )}
       </ul>
 
       {/* Dark/Light Toggle — only one button here */}
