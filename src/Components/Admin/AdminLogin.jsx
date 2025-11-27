@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { signInAdmin } from "../../Api/adminService";
 
 export default function LoginPage() {
   const [darkMode, setDarkMode] = useState(true);
@@ -94,9 +95,23 @@ export default function LoginPage() {
     };
   }, [darkMode]);
 
-  const handleLogin = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Logging in with:", email, password);
+    setErrorMsg("");
+    setLoading(true);
+    try {
+      await signInAdmin({ email, password });
+      // TODO: Navigate to admin dashboard or protected route
+      // For now, just indicate success in console
+      console.log("Admin signed in successfully");
+    } catch (err) {
+      setErrorMsg(err?.message || "Failed to sign in");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -170,9 +185,20 @@ export default function LoginPage() {
                 ? "bg-cyan-500 hover:bg-cyan-400 text-cyan-300"
                 : "bg-blue-500 hover:bg-blue-400 text-blue-700"
             }`}
+            disabled={loading}
           >
-            Sign In
+            {loading ? "Signing In..." : "Sign In"}
           </button>
+
+          {errorMsg && (
+            <div
+              className={`mt-2 text-sm ${
+                darkMode ? "text-rose-300" : "text-red-600"
+              }`}
+            >
+              {errorMsg}
+            </div>
+          )}
         </form>
 
         <p
