@@ -1,15 +1,15 @@
 import { createClient } from "@supabase/supabase-js";
 
-// Use the provided Supabase URL and read the anon key from Vite env
-const supabaseUrl = "https://dsoelyxbdthtcaufuhbe.supabase.co";
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseKey) {
-  console.error("Supabase anon key missing:", {
+if (!supabaseUrl || !supabaseKey) {
+  console.error("Supabase env missing:", {
+    VITE_SUPABASE_URL: supabaseUrl,
     VITE_SUPABASE_ANON_KEY: supabaseKey ? "set" : undefined,
   });
   throw new Error(
-    "Supabase anon key missing. Define VITE_SUPABASE_ANON_KEY in .env and restart dev server."
+    "Supabase URL/Anon Key missing. Define VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in .env then restart dev server."
   );
 }
 

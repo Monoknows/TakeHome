@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { fetchContent } from "../../Api/contentService";
 
 export default function About({ darkMode }) {
   const sectionRef = useRef(null);
   const [inView, setInView] = useState(false);
+  const [aboutText, setAboutText] = useState("");
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -27,6 +29,21 @@ export default function About({ darkMode }) {
 
     observer.observe(node);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const map = await fetchContent(["about_text"]);
+        if (mounted && map.about_text) setAboutText(String(map.about_text));
+      } catch (_) {
+        // ignore and use default static text
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
@@ -57,31 +74,8 @@ export default function About({ darkMode }) {
               About Me
             </h1>
             <p className="mt-4 leading-relaxed flex-1">
-              I am a passionate and dedicated developer with a strong interest
-              in building dynamic and user-friendly web applications. I thrive
-              on solving problems through code and take pride in writing clean,
-              efficient, and maintainable solutions. My curiosity drives me to
-              constantly explore new technologies, frameworks, and best
-              practices in the ever-evolving world of web development. Whether
-              it’s learning a new programming language, diving into a complex
-              project, or collaborating with others, I’m always eager to grow
-              both personally and professionally in the tech industry.
-            </p>
-            <p className="mt-4 leading-relaxed">
-              Beyond coding, I value teamwork, creativity, and the ability to
-              adapt in fast-paced environments. I believe that technology is not
-              just about building applications but also about creating solutions
-              that have a real impact on people’s lives. My long-term goal is to
-              contribute to innovative projects that combine technical
-              excellence with meaningful purpose.
-            </p>
-            <p className="mt-3 leading-relaxed">
-              Outside of development, I enjoy continuous learning through books,
-              online courses, and open-source contributions. These experiences
-              not only sharpen my technical skills but also expand my
-              perspective as a problem solver. I strive to maintain a balance
-              between technical growth and personal well-being, believing that a
-              motivated and healthy mindset is key to delivering impactful work.
+              {aboutText ||
+                "I am a passionate and dedicated developer with a strong interest in building dynamic and user-friendly web applications. I thrive on solving problems through code and take pride in writing clean, efficient, and maintainable solutions. My curiosity drives me to constantly explore new technologies, frameworks, and best practices in the ever-evolving world of web development. Whether it’s learning a new programming language, diving into a complex project, or collaborating with others, I’m always eager to grow both personally and professionally in the tech industry."}
             </p>
           </div>
         </div>

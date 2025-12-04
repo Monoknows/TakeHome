@@ -10,6 +10,8 @@ import { Info } from "./Components/Info/Info";
 import Contacts from "./Components/Contacts/Contacts";
 import ApiChatbot from "./Components/Api/apiChatbot";
 import AdminLogin from "./Components/Admin/AdminLogin";
+import AdminSignUp from "./Components/Admin/AdminSignUp";
+import AdminDashboard from "./Components/Admin/AdminDashboard";
 import Seminars from "./Components/Seminars/Seminars";
 
 export default function App() {
@@ -35,6 +37,8 @@ export default function App() {
           }
         />
         <Route path="/admin" element={<AdminLogin darkMode={darkMode} />} />
+        <Route path="/admin/signup" element={<AdminSignUp />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );

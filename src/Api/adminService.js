@@ -1,36 +1,43 @@
-import { supabase } from './supabaseClient';
+import { supabase } from "./supabaseClient";
 
-export async function signUpAdmin({ email, password, fullName }) {
-  const { data: authData, error: authError } = await supabase.auth.signUp({
-    email,
-    password,
-  });
-  if (authError) throw authError;
-
-  const userId = authData.user?.id;
-  if (!userId) return authData;
-
-  const { error: profileError } = await supabase.from('admins').upsert(
-    { id: userId, email, full_name: fullName ?? null },
-    { onConflict: 'id' }
-  );
-  if (profileError) throw profileError;
-
-  return authData;
+export async function signUpAdmin({ username, password }) {
+  const { error: accountsError } = await supabase
+    .from("Accounts")
+    .insert({ Username: username, Password: password });
+  if (accountsError) {
+    throw accountsError;
+  }
+  return { status: "ok" };
 }
 
-export async function signInAdmin({ email, password }) {
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+export async function signInAdmin({ username, password }) {
+  const { data, error } = await supabase
+    .from("Accounts")
+    .select("Username, Password")
+    .eq("Username", username)
+    .eq("Password", password)
+    .limit(1)
+    .maybeSingle();
   if (error) throw error;
-  return data;
+  if (!data) throw new Error("Invalid username or password");
+  const user = { username: data.Username };
+  try {
+    localStorage.setItem("accounts_user", JSON.stringify(user));
+  } catch {}
+  return { user };
 }
 
 export async function getCurrentAdmin() {
-  const { data } = await supabase.auth.getUser();
-  return data?.user ?? null;
+  try {
+    const raw = localStorage.getItem("accounts_user");
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function signOutAdmin() {
-  const { error } = await supabase.auth.signOut();
-  if (error) throw error;
+  try {
+    localStorage.removeItem("accounts_user");
+  } catch {}
 }

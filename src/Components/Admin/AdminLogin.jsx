@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { signInAdmin } from "../../Api/adminService";
 
 export default function LoginPage() {
   const [darkMode, setDarkMode] = useState(true);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const canvasRef = useRef(null);
   const particles = useRef([]);
@@ -97,16 +98,18 @@ export default function LoginPage() {
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMsg("");
     setLoading(true);
     try {
-      await signInAdmin({ email, password });
-      // TODO: Navigate to admin dashboard or protected route
-      // For now, just indicate success in console
-      console.log("Admin signed in successfully");
+      await signInAdmin({
+        username: username.trim(),
+        password: password.trim(),
+      });
+      navigate("/admin/dashboard");
     } catch (err) {
       setErrorMsg(err?.message || "Failed to sign in");
     } finally {
@@ -154,10 +157,10 @@ export default function LoginPage() {
 
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className={`p-3 rounded-md outline-none transition-colors duration-300 ${
               darkMode
                 ? "bg-slate-700 text-white placeholder-slate-400"
@@ -200,6 +203,18 @@ export default function LoginPage() {
             </div>
           )}
         </form>
+
+        <div className="mt-3 text-center text-sm">
+          <button
+            type="button"
+            onClick={() => navigate("/admin/signup")}
+            className={`underline hover:opacity-80 ${
+              darkMode ? "text-cyan-300" : "text-blue-700"
+            }`}
+          >
+            Don’t have an account? Sign up
+          </button>
+        </div>
 
         <p
           className={`mt-4 text-center text-sm ${
