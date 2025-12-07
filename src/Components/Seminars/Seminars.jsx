@@ -19,6 +19,12 @@ export default function Seminars({ darkMode }) {
       date: "May 17, 2023",
       image: "ExcelCert-1.png",
     },
+    {
+      title: "Cisco Introduction to Cybersecurity",
+      issuer: "Cisco Networking Academy",
+      date: "December 6, 2025",
+      image: "CiscoCert.png",
+    },
   ];
 
   const backdrop = {
