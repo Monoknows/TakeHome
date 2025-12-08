@@ -117,6 +117,8 @@ export default function ApiChatbot({ darkMode }) {
       const finalText = htmlToPlainText(reply);
       const botMessage = { sender: "bot", text: finalText };
       setMessages((prev) => [...prev, botMessage]);
+      await saveMessage(userMessage); // Save user message to Supabase
+      await saveMessage(botMessage); // Save bot reply to Supabase
     } catch (error) {
       console.error("Chatbot fetch error:", error);
       setMessages((prev) => [

@@ -288,7 +288,78 @@ export default function AdminDashboard() {
           </div>
         </form>
 
-        {/* Accounts table removed per request */}
+        {/* Diagnostics */}
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold mb-3">Diagnostics</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              className={`p-4 rounded-md ${
+                darkMode ? "bg-slate-700/60" : "bg-white"
+              }`}
+            >
+              <div className="text-sm opacity-80 mb-2">Supabase URL</div>
+              <div className="text-sm break-all">
+                {import.meta.env.VITE_SUPABASE_URL || "(not set)"}
+              </div>
+            </div>
+            <div
+              className={`p-4 rounded-md ${
+                darkMode ? "bg-slate-700/60" : "bg-white"
+              }`}
+            >
+              <div className="text-sm opacity-80 mb-2">Content Fetch</div>
+              <div className="text-sm">
+                {Object.keys(content || {}).length > 0
+                  ? "OK"
+                  : "No keys loaded"}
+              </div>
+            </div>
+            <div
+              className={`p-4 rounded-md ${
+                darkMode ? "bg-slate-700/60" : "bg-white"
+              }`}
+            >
+              <div className="text-sm opacity-80 mb-2">Header Image URL</div>
+              <div className="text-xs break-all">
+                {content.header_image_url || "(none)"}
+              </div>
+              {content.header_image_url && (
+                <a
+                  href={content.header_image_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`inline-block mt-2 text-xs underline ${
+                    darkMode ? "text-cyan-300" : "text-blue-700"
+                  }`}
+                >
+                  Open
+                </a>
+              )}
+            </div>
+            <div
+              className={`p-4 rounded-md ${
+                darkMode ? "bg-slate-700/60" : "bg-white"
+              }`}
+            >
+              <div className="text-sm opacity-80 mb-2">About Image URL</div>
+              <div className="text-xs break-all">
+                {content.about_image_url || "(none)"}
+              </div>
+              {content.about_image_url && (
+                <a
+                  href={content.about_image_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`inline-block mt-2 text-xs underline ${
+                    darkMode ? "text-cyan-300" : "text-blue-700"
+                  }`}
+                >
+                  Open
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
