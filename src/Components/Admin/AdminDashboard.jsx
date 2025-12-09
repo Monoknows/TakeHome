@@ -2,6 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCurrentAdmin, signOutAdmin } from "../../Api/adminService";
 import { fetchAllContent, upsertContent } from "../../Api/contentService";
+import {
+  fetchSectionsList,
+  saveSectionsList,
+  fetchSection,
+  saveSection,
+} from "../../Api/contentService";
 // Accounts table section removed
 import { supabase } from "../../Api/supabaseClient";
 
@@ -19,6 +25,9 @@ export default function AdminDashboard() {
   const [message, setMessage] = useState("");
   // const [accounts, setAccounts] = useState([]);
   // const [accountsError, setAccountsError] = useState("");
+  const [sections, setSections] = useState([]);
+  const [sectionsLoading, setSectionsLoading] = useState(false);
+  const imagesBucket = import.meta.env.VITE_IMAGES_BUCKET || "images";
 
   // Animated background to match Admin pages
   useEffect(() => {
@@ -122,7 +131,15 @@ export default function AdminDashboard() {
         const all = await fetchAllContent().catch(() => ({}));
         if (!mounted) return;
         setContent(all || {});
-        // Accounts table section removed
+        // Load dynamic sections
+        try {
+          setSectionsLoading(true);
+          const ids = await fetchSectionsList();
+          const loaded = await Promise.all(ids.map((id) => fetchSection(id)));
+          setSections(loaded);
+        } finally {
+          setSectionsLoading(false);
+        }
       } finally {
         setLoading(false);
       }
@@ -142,6 +159,11 @@ export default function AdminDashboard() {
       for (const [key, value] of entries) {
         await upsertContent(key, value);
       }
+      // Also persist sections list and each section's content
+      await saveSectionsList(sections.map((s) => s.id));
+      for (const s of sections) {
+        await saveSection(s);
+      }
       setMessage("Content saved ✅");
     } catch (err) {
       setError(err?.message || "Failed to save content");
@@ -158,11 +180,11 @@ export default function AdminDashboard() {
     try {
       const fileName = `${key}-${Date.now()}-${file.name}`;
       const { error: upErr } = await supabase.storage
-        .from("images")
+        .from(imagesBucket)
         .upload(fileName, file, { upsert: false, cacheControl: "3600" });
       if (upErr) throw upErr;
       const { data: urlData } = supabase.storage
-        .from("images")
+        .from(imagesBucket)
         .getPublicUrl(fileName);
       const publicUrl = urlData?.publicUrl;
       if (!publicUrl) throw new Error("Failed to get public URL");
@@ -234,6 +256,181 @@ export default function AdminDashboard() {
           </div>
         </div>
 
+        {/* Sections Editor (placed above Save Content) */}
+        <div className="mt-2 mb-8">
+          <h2 className="text-xl font-semibold mb-3">Sections</h2>
+          <div className="flex items-center gap-3 mb-3">
+            <button
+              type="button"
+              onClick={async () => {
+                setError("");
+                try {
+                  const id = Math.random().toString(36).slice(2, 10);
+                  const next = [
+                    ...sections,
+                    { id, title: "", description: "", image_url: "" },
+                  ];
+                  setSections(next);
+                  await saveSectionsList(next.map((s) => s.id));
+                  await saveSection({
+                    id,
+                    title: "",
+                    description: "",
+                    image_url: "",
+                  });
+                  setMessage("Section added ✅");
+                } catch (err) {
+                  setError(
+                    err?.message ||
+                      "Failed to add section (check site_content + RLS)"
+                  );
+                }
+              }}
+              className={`px-3 py-2 rounded-md ${
+                darkMode
+                  ? "bg-cyan-500 hover:bg-cyan-400"
+                  : "bg-blue-500 hover:bg-blue-400"
+              }`}
+            >
+              Add Section
+            </button>
+            {sectionsLoading && (
+              <span className="text-sm opacity-80">Loading…</span>
+            )}
+            <button
+              type="button"
+              onClick={async () => {
+                setError("");
+                setMessage("");
+                try {
+                  await saveSectionsList(sections.map((s) => s.id));
+                  for (const s of sections) {
+                    await saveSection(s);
+                  }
+                  setMessage("Sections saved ✅");
+                } catch (err) {
+                  setError(err?.message || "Failed to save sections");
+                }
+              }}
+              className={`px-3 py-2 rounded-md ${
+                darkMode
+                  ? "bg-cyan-500 hover:bg-cyan-400"
+                  : "bg-blue-500 hover:bg-blue-400"
+              }`}
+            >
+              Save Sections
+            </button>
+          </div>
+
+          <div className="space-y-6">
+            {sections.map((s, idx) => (
+              <div
+                key={s.id}
+                className={`p-4 rounded-xl border ${
+                  darkMode
+                    ? "border-cyan-500/30 bg-slate-800/40"
+                    : "border-blue-400/30 bg-blue-100/40"
+                }`}
+              >
+                <div className="flex gap-3 items-center mb-3">
+                  <input
+                    className="flex-1 p-2 rounded-md border"
+                    placeholder="Title"
+                    value={s.title}
+                    onChange={async (e) => {
+                      const next = [...sections];
+                      next[idx] = { ...next[idx], title: e.target.value };
+                      setSections(next);
+                      await saveSection(next[idx]);
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      setError("");
+                      try {
+                        const id = sections[idx].id;
+                        const next = sections.filter((_, i) => i !== idx);
+                        setSections(next);
+                        await saveSectionsList(next.map((x) => x.id));
+                        await saveSection({
+                          id,
+                          title: "",
+                          description: "",
+                          image_url: "",
+                        });
+                        setMessage("Section deleted ✅");
+                      } catch (err) {
+                        setError(err?.message || "Failed to delete section");
+                      }
+                    }}
+                    className={`px-3 py-2 rounded-md ${
+                      darkMode
+                        ? "bg-rose-500 hover:bg-rose-400"
+                        : "bg-red-600 hover:bg-red-500"
+                    } text-white`}
+                  >
+                    Delete
+                  </button>
+                </div>
+
+                <textarea
+                  className="w-full p-2 rounded-md border min-h-[100px]"
+                  placeholder="Description (blank line creates new paragraph)"
+                  value={s.description}
+                  onChange={async (e) => {
+                    const next = [...sections];
+                    next[idx] = { ...next[idx], description: e.target.value };
+                    setSections(next);
+                    await saveSection(next[idx]);
+                  }}
+                />
+
+                <div className="mt-3 flex items-center gap-3">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0] || null;
+                      if (!file) return;
+                      const path = `section-${s.id}-${Date.now()}-${file.name}`;
+                      const { error: upErr } = await supabase.storage
+                        .from(imagesBucket)
+                        .upload(path, file, { upsert: true });
+                      if (upErr) {
+                        setError(upErr.message);
+                        return;
+                      }
+                      const { data } = supabase.storage
+                        .from(imagesBucket)
+                        .getPublicUrl(path);
+                      const url = data?.publicUrl || "";
+                      const next = [...sections];
+                      next[idx] = { ...next[idx], image_url: url };
+                      setSections(next);
+                      await saveSection(next[idx]);
+                    }}
+                  />
+                  {s.image_url ? (
+                    <a
+                      href={s.image_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`text-sm underline ${
+                        darkMode ? "text-cyan-300" : "text-blue-700"
+                      }`}
+                    >
+                      Open image
+                    </a>
+                  ) : (
+                    <span className="text-sm opacity-70">No image</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <form onSubmit={handleSave} className="space-y-4">
           {/* A few common fields. You can add more keys here */}
           <Field
@@ -287,79 +484,6 @@ export default function AdminDashboard() {
             {error && <span className="text-red-600 text-sm">{error}</span>}
           </div>
         </form>
-
-        {/* Diagnostics */}
-        <div className="mt-10">
-          <h2 className="text-xl font-semibold mb-3">Diagnostics</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div
-              className={`p-4 rounded-md ${
-                darkMode ? "bg-slate-700/60" : "bg-white"
-              }`}
-            >
-              <div className="text-sm opacity-80 mb-2">Supabase URL</div>
-              <div className="text-sm break-all">
-                {import.meta.env.VITE_SUPABASE_URL || "(not set)"}
-              </div>
-            </div>
-            <div
-              className={`p-4 rounded-md ${
-                darkMode ? "bg-slate-700/60" : "bg-white"
-              }`}
-            >
-              <div className="text-sm opacity-80 mb-2">Content Fetch</div>
-              <div className="text-sm">
-                {Object.keys(content || {}).length > 0
-                  ? "OK"
-                  : "No keys loaded"}
-              </div>
-            </div>
-            <div
-              className={`p-4 rounded-md ${
-                darkMode ? "bg-slate-700/60" : "bg-white"
-              }`}
-            >
-              <div className="text-sm opacity-80 mb-2">Header Image URL</div>
-              <div className="text-xs break-all">
-                {content.header_image_url || "(none)"}
-              </div>
-              {content.header_image_url && (
-                <a
-                  href={content.header_image_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`inline-block mt-2 text-xs underline ${
-                    darkMode ? "text-cyan-300" : "text-blue-700"
-                  }`}
-                >
-                  Open
-                </a>
-              )}
-            </div>
-            <div
-              className={`p-4 rounded-md ${
-                darkMode ? "bg-slate-700/60" : "bg-white"
-              }`}
-            >
-              <div className="text-sm opacity-80 mb-2">About Image URL</div>
-              <div className="text-xs break-all">
-                {content.about_image_url || "(none)"}
-              </div>
-              {content.about_image_url && (
-                <a
-                  href={content.about_image_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`inline-block mt-2 text-xs underline ${
-                    darkMode ? "text-cyan-300" : "text-blue-700"
-                  }`}
-                >
-                  Open
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

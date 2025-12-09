@@ -13,6 +13,7 @@ import AdminLogin from "./Components/Admin/AdminLogin";
 import AdminSignUp from "./Components/Admin/AdminSignUp";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
 import Seminars from "./Components/Seminars/Seminars";
+import Sections from "./Components/Sections/Sections";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -28,6 +29,7 @@ export default function App() {
               <Header darkMode={darkMode} />
               <Divider darkMode={darkMode} />
               <About darkMode={darkMode} />
+              <Sections darkMode={darkMode} />
               <Skills darkMode={darkMode} />
               <Info darkMode={darkMode} />
               <Seminars darkMode={darkMode} />
