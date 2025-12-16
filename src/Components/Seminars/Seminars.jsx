@@ -25,6 +25,13 @@ export default function Seminars({ darkMode }) {
       date: "December 6, 2025",
       image: "CiscoCert.png",
     },
+    {
+      title:
+        "Information Technology Specialist in Device Configuration and Management",
+      issuer: "Certiport",
+      date: "December 15, 2025",
+      image: "Device Configuration and Management-1.png",
+    },
   ];
 
   const backdrop = {

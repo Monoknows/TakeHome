@@ -9,11 +9,7 @@ import Skills from "./Components/Skills/Skills";
 import { Info } from "./Components/Info/Info";
 import Contacts from "./Components/Contacts/Contacts";
 import ApiChatbot from "./Components/Api/apiChatbot";
-import AdminLogin from "./Components/Admin/AdminLogin";
-import AdminSignUp from "./Components/Admin/AdminSignUp";
-import AdminDashboard from "./Components/Admin/AdminDashboard";
 import Seminars from "./Components/Seminars/Seminars";
-import Sections from "./Components/Sections/Sections";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -29,7 +25,6 @@ export default function App() {
               <Header darkMode={darkMode} />
               <Divider darkMode={darkMode} />
               <About darkMode={darkMode} />
-              <Sections darkMode={darkMode} />
               <Skills darkMode={darkMode} />
               <Info darkMode={darkMode} />
               <Seminars darkMode={darkMode} />
@@ -38,9 +33,6 @@ export default function App() {
             </>
           }
         />
-        <Route path="/admin" element={<AdminLogin darkMode={darkMode} />} />
-        <Route path="/admin/signup" element={<AdminSignUp />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );
