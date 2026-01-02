@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { title } from "framer-motion/client";
 
 export default function Seminars({ darkMode }) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -10,27 +11,33 @@ export default function Seminars({ darkMode }) {
         "Software QA manual testing workshop: Become a confident QA Specialist- Stey-by-Step, Using jira,TestRail and Excel",
       issuer: "MST-Connect",
       date: "November 9, 2025",
-      image: "JON ALFRED V BERNABE-1.png",
+      image: "/JON ALFRED V BERNABE-1.png",
     },
     {
       title:
         "Microsoft Office Specialist: Excel Associate (Excel and Excel 2019)",
       issuer: "Microsoft",
       date: "May 17, 2023",
-      image: "ExcelCert-1.png",
+      image: "/ExcelCert-1.png",
     },
     {
       title: "Cisco Introduction to Cybersecurity",
       issuer: "Cisco Networking Academy",
       date: "December 6, 2025",
-      image: "CiscoCert.png",
+      image: "/CiscoCert.png",
     },
     {
       title:
         "Information Technology Specialist in Device Configuration and Management",
       issuer: "Certiport",
       date: "December 15, 2025",
-      image: "Device Configuration and Management-1.png",
+      image: "/Device Configuration and Management-1.png",
+    },
+    {
+      title: "Microsoft Office Specialist: Access 2019 Expert",
+      issuer: "Microsoft",
+      date: "December 21, 2025",
+      image: "/Access-1.png",
     },
   ];
 

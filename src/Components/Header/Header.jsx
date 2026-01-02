@@ -1,5 +1,4 @@
 import { useRef, useEffect, useState } from "react";
-import { fetchContent } from "../../Api/contentService";
 
 function LiveBackground({ darkMode }) {
   const canvasRef = useRef(null);
@@ -188,20 +187,9 @@ function TypingHeader({ text = "", darkMode }) {
 export default function Header({ darkMode }) {
   const [headerTitle, setHeaderTitle] = useState("Jon Alfred V. Bernabe");
 
+  // Static title; database removed
   useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const map = await fetchContent(["header_title"]);
-        if (mounted && map.header_title)
-          setHeaderTitle(String(map.header_title));
-      } catch (_) {
-        // ignore, fallback to default
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
+    setHeaderTitle("Jon Alfred V. Bernabe");
   }, []);
   return (
     <section id="home">
@@ -233,12 +221,12 @@ export default function Header({ darkMode }) {
         >
           <img
             className="absolute inset-0 w-full h-full rounded-full object-cover transition-opacity duration-300 opacity-100 hover:opacity-0"
-            src="./pfp.png"
+            src="/pfp.png"
             alt="profile"
           />
           <img
             className="absolute inset-0 w-full h-full rounded-full object-cover transition-opacity duration-300 opacity-0 hover:opacity-100"
-            src="./finn.png"
+            src="/finn.png"
             alt="profile alt"
           />
         </div>

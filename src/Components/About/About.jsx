@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchContent } from "../../Api/contentService";
 
 export default function About({ darkMode }) {
   const sectionRef = useRef(null);
@@ -31,19 +30,9 @@ export default function About({ darkMode }) {
     return () => observer.disconnect();
   }, []);
 
+  // Static fallback only; database removed
   useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const map = await fetchContent(["about_text"]);
-        if (mounted && map.about_text) setAboutText(String(map.about_text));
-      } catch (_) {
-        // ignore and use default static text
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
+    setAboutText("");
   }, []);
 
   return (

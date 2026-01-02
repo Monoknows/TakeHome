@@ -1,26 +1,10 @@
-import { supabase } from "./supabaseClient";
-
-export async function signUpAdmin({ username, password }) {
-  const { error: accountsError } = await supabase
-    .from("Accounts")
-    .insert({ Username: username, Password: password });
-  if (accountsError) {
-    throw accountsError;
-  }
+// Database removed: provide minimal localStorage-based stubs or no-ops
+export async function signUpAdmin() {
   return { status: "ok" };
 }
 
-export async function signInAdmin({ username, password }) {
-  const { data, error } = await supabase
-    .from("Accounts")
-    .select("Username, Password")
-    .eq("Username", username)
-    .eq("Password", password)
-    .limit(1)
-    .maybeSingle();
-  if (error) throw error;
-  if (!data) throw new Error("Invalid username or password");
-  const user = { username: data.Username };
+export async function signInAdmin({ username }) {
+  const user = { username };
   try {
     localStorage.setItem("accounts_user", JSON.stringify(user));
   } catch {}

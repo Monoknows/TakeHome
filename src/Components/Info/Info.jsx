@@ -4,22 +4,22 @@ export function Info({ darkMode }) {
   const projects = [
     {
       title: "Adventure of Ewan",
-      img: "./Ewan.png",
-      video: "./Screen-Recording.mp4",
+      img: "/Ewan.png",
+      video: "/Screen-Recording.mp4",
       description:
         "AdventureOfEwan is a 2D platformer game that features a simple and cute design with fun yet challenging gameplay.",
     },
     {
       title: "SafeHub",
-      img: "./SafeHub.png",
-      hoverImg: "./safehubHover.png",
+      img: "/SafeHub.png",
+      hoverImg: "/safehubHover.png",
       description:
         "SafeHub is a mental health web system designed to help students at La Consolacion University of the Philippines take care of their well-being through supportive digital tools.",
     },
     {
       title: "Responder Ai Chatbot",
-      img: "./Responder.png",
-      hoverImg: "./ResponderChat.png",
+      img: "/Responder.png",
+      hoverImg: "/ResponderChat.png",
       description:
         "Responder Ai Chatbot is an AI-powered chatbot designed to assist programmers through coding-related inquiries, providing quick and accurate responses to enhance their coding experience.",
     },

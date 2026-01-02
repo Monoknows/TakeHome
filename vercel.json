@@ -1,11 +1,4 @@
 {
-  "build": {
-    "env": {
-      "VITE_SUPABASE_URL": "${VITE_SUPABASE_URL}",
-      "VITE_SUPABASE_ANON_KEY": "${VITE_SUPABASE_ANON_KEY}",
-      "VITE_IMAGES_BUCKET": "${VITE_IMAGES_BUCKET}"
-    }
-  },
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
