@@ -63,7 +63,6 @@ export default function About({ darkMode }) {
               About Me
             </h1>
             {(() => {
-              // If aboutText exists, split into paragraphs by double newline
               if (aboutText) {
                 const parts = String(aboutText).split(/\n\n+/);
                 return (
@@ -79,17 +78,22 @@ export default function About({ darkMode }) {
                   </div>
                 );
               }
-              // Fallback: two paragraphs
+
               return (
                 <div className="flex-1">
                   <p className="mt-4 leading-relaxed">
                     {
-                      "I am a passionate and dedicated developer with a strong interest in building dynamic and user-friendly web applications. I thrive on solving problems through code and take pride in writing clean, efficient, and maintainable solutions. My curiosity drives me to constantly explore new technologies, frameworks, and best practices in the ever-evolving world of web development. Whether it’s learning a new programming language, diving into a complex project, or collaborating with others, I’m always eager to grow both personally and professionally in the tech industry."
+                      "I'm a passionate and dedicated IT student with a strong interest in web and software development. I am eager to apply my knowledge and skills in real-world projects and internships. I enjoy problem-solving and continuously learning new technologies to enhance my skills and to stay updated in this updating field. I am very committed to delivering high-quality work and am always looking for oppurtunities to grow both personally and professionally."
                     }
                   </p>
                   <p className="mt-4 leading-relaxed">
                     {
-                      "Over the years, I’ve worked across the stack—crafting accessible interfaces, architecting APIs, and tuning performance so products feel fast and reliable. I value thoughtful design, clear communication, and pragmatic engineering that scales. Outside of coding, I enjoy teaching, documenting learnings, and contributing to communities where knowledge is shared openly. I’m motivated by building tools and experiences that help people, and I’m constantly refining my craft to deliver high-quality, resilient software."
+                      "Over the years, I've trained my abilities through various personal and academic projects, constantly seeking to improve and stay updated with the latest technological trends. I expand my knowledge through online courses, tutorials, and hands-on practices. I am enthusiastic about collaborating with other people in the tech industry to create innovative solutions. I am excited about the opportunites that lie ahead and look forward to contributing to impactful projects in the future.  "
+                    }
+                  </p>
+                  <p className="mt-4 leading-relaxed">
+                    {
+                      "Feel free to reach out to me for any potential collaborations, internships, or just to connect and share ideas. I'm always open to new opportunities and eager to learn from others in the field. "
                     }
                   </p>
                 </div>
