@@ -1,4 +1,5 @@
 import { video } from "framer-motion/client";
+import { href } from "react-router-dom";
 
 export function Info({ darkMode }) {
   const projects = [
@@ -13,6 +14,7 @@ export function Info({ darkMode }) {
       title: "SafeHub",
       img: "/SafeHub.png",
       hoverImg: "/safehubHover.png",
+      href: "https://safehub-lcup.uk",
       description:
         "SafeHub is a mental health web system designed to help students at La Consolacion University of the Philippines take care of their well-being through supportive digital tools.",
     },
@@ -20,6 +22,7 @@ export function Info({ darkMode }) {
       title: "Responder Ai Chatbot",
       img: "/Responder.png",
       hoverImg: "/ResponderChat.png",
+      href: "https://chat-bot-p42q.vercel.app",
       description:
         "Responder Ai Chatbot is an AI-powered chatbot designed to assist programmers through coding-related inquiries, providing quick and accurate responses to enhance their coding experience.",
     },
@@ -52,33 +55,73 @@ export function Info({ darkMode }) {
               }`}
             >
               <div className="aspect-[16/10] overflow-hidden relative">
-                <img
-                  src={p.img}
-                  alt={`${p.title} preview`}
-                  className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
-                    p.hoverImg ? "group-hover:opacity-0" : ""
-                  }`}
-                />
-                {p.hoverImg && (
-                  <img
-                    src={p.hoverImg}
-                    alt={`${p.title} hover preview`}
-                    className="absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  />
-                )}
-                {p.video && (
-                  <video
-                    src={p.video}
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                    onMouseEnter={(e) => e.target.play()}
-                    onMouseLeave={(e) => {
-                      e.target.pause();
-                      e.target.currentTime = 0;
-                    }}
-                  />
+                {p.href ? (
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 block"
+                  >
+                    <img
+                      src={p.img}
+                      alt={`${p.title} preview`}
+                      className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
+                        p.hoverImg ? "group-hover:opacity-0" : ""
+                      }`}
+                    />
+                    {p.hoverImg && (
+                      <img
+                        src={p.hoverImg}
+                        alt={`${p.title} hover preview`}
+                        className="absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      />
+                    )}
+                    {p.video && (
+                      <video
+                        src={p.video}
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                        onMouseEnter={(e) => e.target.play()}
+                        onMouseLeave={(e) => {
+                          e.target.pause();
+                          e.target.currentTime = 0;
+                        }}
+                      />
+                    )}
+                  </a>
+                ) : (
+                  <>
+                    <img
+                      src={p.img}
+                      alt={`${p.title} preview`}
+                      className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
+                        p.hoverImg ? "group-hover:opacity-0" : ""
+                      }`}
+                    />
+                    {p.hoverImg && (
+                      <img
+                        src={p.hoverImg}
+                        alt={`${p.title} hover preview`}
+                        className="absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      />
+                    )}
+                    {p.video && (
+                      <video
+                        src={p.video}
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                        onMouseEnter={(e) => e.target.play()}
+                        onMouseLeave={(e) => {
+                          e.target.pause();
+                          e.target.currentTime = 0;
+                        }}
+                      />
+                    )}
+                  </>
                 )}
               </div>
 
