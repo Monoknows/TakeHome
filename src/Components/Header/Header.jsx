@@ -187,7 +187,6 @@ function TypingHeader({ text = "", darkMode }) {
 export default function Header({ darkMode }) {
   const [headerTitle, setHeaderTitle] = useState("Jon Alfred V. Bernabe");
 
-  // Static title; database removed
   useEffect(() => {
     setHeaderTitle("Jon Alfred V. Bernabe");
   }, []);
@@ -226,7 +225,7 @@ export default function Header({ darkMode }) {
           />
           <img
             className="absolute inset-0 w-full h-full rounded-full object-cover transition-opacity duration-300 opacity-0 hover:opacity-100"
-            src="/finn.png"
+            src="/Me.jpg"
             alt="profile alt"
           />
         </div>
