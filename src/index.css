@@ -19,7 +19,7 @@ root {
 
 body {
   margin: 0;
-  min-width: full;
+  min-width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
 }

@@ -193,19 +193,19 @@ export default function Header({ darkMode }) {
   return (
     <section id="home">
       <header
-        className={`relative overflow-hidden p-15 h-150 flex items-center justify-between text-xl transition-colors duration-300 ${
+        className={`relative overflow-hidden px-4 py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 text-xl transition-colors duration-300 ${
           darkMode ? "bg-slate-900" : "bg-blue-200"
         }`}
       >
         <LiveBackground darkMode={darkMode} />
 
-        <div className="relative z-10 text-left max-w-[60%]">
+        <div className="relative z-10 text-left max-w-full md:max-w-[60%]">
           <TypingHeader text={headerTitle} darkMode={darkMode} />
 
           <p
             className={`text-xl transition-colors duration-300 ${
               darkMode ? "text-slate-300" : "text-blue-700"
-            }`}
+            } mt-4`}
           >
             A passionate BSIT student with a love for coding and a constant
             <br />
@@ -214,7 +214,7 @@ export default function Header({ darkMode }) {
         </div>
 
         <div
-          className="relative z-10 w-[350px] h-[350px]"
+          className="relative z-10 w-32 h-32 sm:w-44 sm:h-44 md:w-72 md:h-72"
           aria-hidden="true"
           role="img"
         >

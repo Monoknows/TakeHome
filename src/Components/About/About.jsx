@@ -39,12 +39,12 @@ export default function About({ darkMode }) {
     <section
       ref={sectionRef}
       id="about"
-      className={`h-150 p-10 flex justify-center transition-colors duration-300 ${
+      className={`px-4 py-12 md:py-16 flex justify-center transition-colors duration-300 ${
         darkMode ? "bg-[#0b1120] text-cyan-300" : "bg-[#dbeafe] text-blue-700"
       }`}
     >
       <div
-        className={`card w-500 shadow-xl h-full flex transform transition-all duration-700 ease-out hover:shadow-2xl hover:scale-105 ${
+        className={`card w-full max-w-xl shadow-xl flex transform transition-all duration-700 ease-out hover:shadow-2xl hover:scale-105 ${
           darkMode
             ? "bg-slate-800 text-cyan-200 focus:ring-2 focus:ring-cyan-400"
             : "bg-white text-blue-700 focus:ring-2 focus:ring-blue-400"
@@ -52,9 +52,9 @@ export default function About({ darkMode }) {
       >
         <div
           tabIndex={0}
-          className="card w-full h-full shadow-xl focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          className="card w-full shadow-xl focus:outline-none focus:ring-2 focus:ring-cyan-400"
         >
-          <div className="card-body flex flex-col justify-center h-full">
+          <div className="card-body flex flex-col justify-center">
             <h1
               className={`card-title text-2xl font-bold ${
                 darkMode ? "text-cyan-300" : "text-blue-700"
