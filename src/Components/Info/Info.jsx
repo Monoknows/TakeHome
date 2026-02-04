@@ -4,11 +4,11 @@ import { href } from "react-router-dom";
 export function Info({ darkMode }) {
   const projects = [
     {
-      title: "Adventure of Ewan",
-      img: "/Ewan.png",
-      video: "/Screen-Recording.mp4",
+      title: "Binhi",
+      img: "/Binhiwebpage.png",
+      href: "https://webpage-intern.vercel.app/",
       description:
-        "AdventureOfEwan is a 2D platformer game that features a simple and cute design with fun yet challenging gameplay.",
+        "Binhi is a web page dedicated to promote an outdoor school in Bulacan designed especially to todlers ages 2-5 years old. It aims to nurture young minds through nature-based learning experiences.",
     },
     {
       title: "SafeHub",
