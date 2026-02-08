@@ -39,6 +39,12 @@ export default function Seminars({ darkMode }) {
       date: "December 21, 2025",
       image: "/Access-1.png",
     },
+    {
+      title: "Responsive Web Design",
+      issuer: "freeCodeCamp",
+      date: "February 8, 2026",
+      image: "/freecodecampcert.png",
+    },
   ];
 
   const backdrop = {
