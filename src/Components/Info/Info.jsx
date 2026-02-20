@@ -26,6 +26,13 @@ export function Info({ darkMode }) {
       description:
         "Responder Ai Chatbot is an AI-powered chatbot designed to assist programmers through coding-related inquiries, providing quick and accurate responses to enhance their coding experience.",
     },
+    {
+      title: "Personal Portfolio",
+      img: "/image.png",
+      href: "https://takehome-three.vercel.app/",
+      description:
+        "A personal portfolio website built with React and Tailwind CSS to showcase my projects, skills, and experiences in a visually appealing and user-friendly manner.",
+    }
   ];
 
   return (
