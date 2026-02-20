@@ -45,6 +45,12 @@ export default function Seminars({ darkMode }) {
       date: "February 8, 2026",
       image: "/freecodecampcert.png",
     },
+    {
+      title: "Python Essentials 2",
+      issuer: "Cisco Networking Academy",
+      date: "February 20, 2025",
+      image: "/pythonCert.png",
+    },
   ];
 
   const backdrop = {
