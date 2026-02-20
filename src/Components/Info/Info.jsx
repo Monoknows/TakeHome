@@ -29,7 +29,8 @@ export function Info({ darkMode }) {
     {
       title: "Personal Portfolio",
       img: "/image.png",
-      href: "https://takehome-three.vercel.app/",
+      hoverImg:"/Hoverimage.png",
+      href: "https://takehome-three.vercel.app/", 
       description:
         "A personal portfolio website built with React and Tailwind CSS to showcase my projects, skills, and experiences in a visually appealing and user-friendly manner.",
     }
