@@ -33,7 +33,14 @@ export function Info({ darkMode }) {
       href: "https://takehome-three.vercel.app/", 
       description:
         "A personal portfolio website built with React and Tailwind CSS to showcase my projects, skills, and experiences in a visually appealing and user-friendly manner.",
-    }
+    },
+    {
+      title:"Royal Hotel",
+      img: "/RoyalHotel.png",
+      href: "https://royal-hotel1.my.canva.site/",
+      description:
+        "Royal Hotel is a simple static landing page for a hotel website built using canva and designed to provide an elegant and inviting online presence for the hotel.",
+    },
   ];
 
   return (
