@@ -83,7 +83,7 @@ export default function About({ darkMode }) {
                 <div className="flex-1">
                   <p className="mt-4 leading-relaxed">
                     {
-                      "I'm a passionate and dedicated IT student with a strong interest in web and software development. I am eager to apply my knowledge and skills in real-world projects and internships. I enjoy problem-solving and continuously learning new technologies to enhance my skills and to stay updated in this updating field. I am very committed to delivering high-quality work and am always looking for oppurtunities to grow both personally and professionally."
+                      "I'm a passionate and dedicated IT graduate with a strong interest in web and software development. I am eager to apply my knowledge and skills in real-world projects. I enjoy problem-solving and continuously learning new technologies to enhance my skills and to stay updated in this updating field. I am very committed to delivering high-quality work and am always looking for oppurtunities to grow both personally and professionally."
                     }
                   </p>
                   <p className="mt-4 leading-relaxed">
@@ -93,7 +93,7 @@ export default function About({ darkMode }) {
                   </p>
                   <p className="mt-4 leading-relaxed">
                     {
-                      "Feel free to reach out to me for any potential collaborations, internships, or just to connect and share ideas. I'm always open to new opportunities and eager to learn from others in the field. "
+                      "Feel free to reach out to me for any potential collaboration or just to connect and share ideas. I'm always open to new opportunities and eager to learn from others in the field. "
                     }
                   </p>
                 </div>

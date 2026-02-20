@@ -207,7 +207,7 @@ export default function Header({ darkMode }) {
               darkMode ? "text-slate-300" : "text-blue-700"
             } mt-4`}
           >
-            A passionate BSIT student with a love for coding and a constant
+            A passionate BSIT graduate with a love for coding and a constant
             <br />
             drive to learn, grow, and take on new challenges in the tech world.
           </p>
